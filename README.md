@@ -1,1 +1,0 @@
-# painel-aws-suporte
