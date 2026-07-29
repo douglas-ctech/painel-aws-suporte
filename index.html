@@ -62,15 +62,12 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-            position: relative;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .card:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
-            border-color: var(--primary-blue);
         }
 
         .card-header h3 {
@@ -80,19 +77,6 @@
             font-weight: 700;
             border-bottom: 1px solid #EDF2F7;
             padding-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .toggle-icon {
-            font-size: 14px;
-            color: var(--accent-orange);
-            transition: transform 0.3s ease;
-        }
-
-        .card.active .toggle-icon {
-            transform: rotate(180deg);
         }
 
         .links-list {
@@ -135,63 +119,6 @@
             color: #FFFFFF;
         }
 
-        /* Seção expansível de Instâncias e IPs */
-        .instances-container {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out, padding 0.3s ease;
-            background: #F8FAFC;
-            border-radius: 6px;
-            margin-top: 0;
-        }
-
-        .card.active .instances-container {
-            max-height: 600px;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #E2E8F0;
-            overflow-y: auto;
-        }
-
-        .instances-title {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--primary-blue);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .instance-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 11px;
-            padding: 5px 0;
-            border-bottom: 1px dashed #E2E8F0;
-            gap: 10px;
-        }
-
-        .instance-item:last-child {
-            border-bottom: none;
-        }
-
-        .instance-name {
-            color: var(--text-main);
-            font-family: monospace;
-            word-break: break-all;
-        }
-
-        .instance-ip {
-            background: #E2E8F0;
-            color: var(--primary-blue);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: monospace;
-            font-weight: 600;
-            white-space: nowrap;
-        }
-
         .card-footer {
             font-size: 12px;
             color: var(--text-muted);
@@ -208,265 +135,118 @@
     <div class="container">
         <header>
             <h1>Painel de Acesso - Ambientes AWS</h1>
-            <p class="subtitle">Central de links rápidos e instâncias associadas</p>
+            <p class="subtitle">Central de links rápidos </p>
         </header>
         
         <div class="grid">
             
             <!-- 1. Procfit -->
-            <div class="card" onclick="toggleCard(this)">
-                <div class="card-header" style="width: 100%;">
-                    <h3>Ambiente - Procfit <span class="toggle-icon">▼</span></h3>
-                    <div class="links-list" onclick="event.stopPropagation()">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Ambiente - Procfit</h3>
+                    <div class="links-list">
                         <a href="https://scope-portal-integrador4.conexao-tech.com/portal/" class="btn-link" target="_blank">Portal Principal <span class="tag">Portal</span></a>
                         <a href="https://scope-portal-integrador4.conexao-tech.com/adm" class="btn-link" target="_blank">Painel Administrativo <span class="tag">ADM</span></a>
                         <a href="https://scope-portal-integrador4.conexao-tech.com/console/" class="btn-link" target="_blank">Console de Operações <span class="tag">Console</span></a>
                     </div>
                 </div>
-                <div class="instances-container">
-                    <div class="instances-title">Instâncias e IPs Associados</div>
-                    <div class="instance-item"><span class="instance-name">ec2-scppsw-procfit-prd-001</span><span class="instance-ip">10.177.80.115</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scppsw-procfit-prd-002</span><span class="instance-ip">10.177.82.76</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-casi-procfit-prd-001</span><span class="instance-ip">10.177.83.29</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-casi-procfit-prd-002</span><span class="instance-ip">10.177.81.28</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpsrv-procfit-prd-001</span><span class="instance-ip">10.177.80.7</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpsrv-procfit-prd-002</span><span class="instance-ip">10.177.82.18</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpsrv-procfit-prd-003</span><span class="instance-ip">10.177.84.60</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpprtl-procfit-prd-001</span><span class="instance-ip">10.177.80.239</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpprtl-procfit-prd-002</span><span class="instance-ip">10.177.80.207</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-procfit-new-sa-east-1-001</span><span class="instance-ip">10.177.33.45</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-procfit-new-sa-east-1-002</span><span class="instance-ip">10.177.33.85</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-procfit-new-sa-east-1-003</span><span class="instance-ip">10.177.33.159</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpcnsl-procfit-prd-001</span><span class="instance-ip">10.177.80.51</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-tknsvc-procfit-prd-001</span><span class="instance-ip">10.177.80.235</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-tknsvc-procfit-prd-002</span><span class="instance-ip">10.177.82.250</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-stpca-procfit-prd-001</span><span class="instance-ip">10.177.80.224</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-stpca-procfit-prd-002-disasterrecovery</span><span class="instance-ip">10.177.82.248</span></div>
-                </div>
                 <div class="card-footer">
-                    <span>📁 AWS • Servidor Integrador 4 (Clique para ver instâncias)</span>
+                    <span>📁 AWS • Servidor Integrador 4</span>
                 </div>
             </div>
 
             <!-- 2. Arius -->
-            <div class="card" onclick="toggleCard(this)">
-                <div class="card-header" style="width: 100%;">
-                    <h3>Ambiente - Arius <span class="toggle-icon">▼</span></h3>
-                    <div class="links-list" onclick="event.stopPropagation()">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Ambiente - Arius</h3>
+                    <div class="links-list">
                         <a href="https://scope-portal-integrador5.conexao-tech.com/portal/" class="btn-link" target="_blank">Portal Principal <span class="tag">Portal</span></a>
                         <a href="https://scope-portal-integrador5.conexao-tech.com/adm" class="btn-link" target="_blank">Painel Administrativo <span class="tag">ADM</span></a>
                         <a href="https://scope-portal-integrador5.conexao-tech.com/console/" class="btn-link" target="_blank">Console de Operações <span class="tag">Console</span></a>
                     </div>
                 </div>
-                <div class="instances-container">
-                    <div class="instances-title">Instâncias e IPs Associados</div>
-                    <div class="instance-item"><span class="instance-name">ec2-scppsw-arius-prd-001</span><span class="instance-ip">10.177.80.73</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scppsw-arius-prd-002</span><span class="instance-ip">10.177.82.78</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-casi-arius-prd-001</span><span class="instance-ip">10.177.83.30</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-casi-arius-prd-002</span><span class="instance-ip">10.177.81.40</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpsrv-arius-prd-001</span><span class="instance-ip">10.177.80.61</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpsrv-arius-prd-002</span><span class="instance-ip">10.177.82.35</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpsrv-arius-prd-003</span><span class="instance-ip">10.177.84.10</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpprtl-arius-prd-001</span><span class="instance-ip">10.177.80.227</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpprtl-arius-prd-002</span><span class="instance-ip">10.177.80.248</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-arius-sa-east-1-001</span><span class="instance-ip">10.177.33.59</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-arius-sa-east-1-002</span><span class="instance-ip">10.177.33.117</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-arius-sa-east-1-003</span><span class="instance-ip">10.177.33.150</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpcnsl-arius-prd-001</span><span class="instance-ip">10.177.80.43</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-tknsvc-arius-prd-001</span><span class="instance-ip">10.177.80.196</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-tknsvc-arius-prd-002</span><span class="instance-ip">10.177.82.229</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-stpca-arius-prd-001</span><span class="instance-ip">10.177.80.197</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-stpca-arius-prd-002-disasterrecovery</span><span class="instance-ip">10.177.82.216</span></div>
-                </div>
                 <div class="card-footer">
-                    <span>📁 AWS • Servidor Integrador 5 (Clique para ver instâncias)</span>
+                    <span>📁 AWS • Servidor Integrador 5</span>
                 </div>
             </div>
 
             <!-- 3. MultiplusCard -->
-            <div class="card" onclick="toggleCard(this)">
-                <div class="card-header" style="width: 100%;">
-                    <h3>Ambiente - MultiplusCard <span class="toggle-icon">▼</span></h3>
-                    <div class="links-list" onclick="event.stopPropagation()">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Ambiente - MultiplusCard</h3>
+                    <div class="links-list">
                         <a href="https://scope-portal-integrador2.conexao-tech.com/portal/" class="btn-link" target="_blank">Portal Principal <span class="tag">Portal</span></a>
                         <a href="https://scope-portal-integrador2.conexao-tech.com/adm" class="btn-link" target="_blank">Painel Administrativo <span class="tag">ADM</span></a>
                         <a href="https://scope-portal-integrador2.conexao-tech.com/console/" class="btn-link" target="_blank">Console de Operações <span class="tag">Console</span></a>
                     </div>
                 </div>
-                <div class="instances-container">
-                    <div class="instances-title">Instâncias e IPs Associados</div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopepsw-prod-mtpls-sa-east-1-001</span><span class="instance-ip">10.177.112.82</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopepsw-prod-mtpls-sa-east-1-002</span><span class="instance-ip">10.177.114.91</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-casi-prod-mtpls-sa-east-1-001</span><span class="instance-ip">10.177.113.47</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-casi-prod-mtpls-sa-east-1-002</span><span class="instance-ip">10.177.115.10</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopesrv-prod-mtpls-sa-east-1-001</span><span class="instance-ip">10.177.112.33</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopesrv-prod-mtpls-sa-east-1-002</span><span class="instance-ip">10.177.114.16</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopesrv-prod-mtpls-sa-east-1-003</span><span class="instance-ip">10.177.116.57</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopeportal-prod-mtpls-sa-east-1-001</span><span class="instance-ip">10177112209</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopeportal-prod-mtpls-sa-east-1-002</span><span class="instance-ip">10177114244</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-multiplus-sa-east-1-001</span><span class="instance-ip">10.177.33.23</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-multiplus-sa-east-1-002</span><span class="instance-ip">10.177.33.75</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-multiplus-sa-east-1-003</span><span class="instance-ip">10.177.33.187</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopeconsole-prod-mtpls-sa-east-1-001</span><span class="instance-ip">10.177.112.22</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-tokenservice-prod-mtpls-sa-east-1-001</span><span class="instance-ip">10177112198</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-tokenservice-prod-mtpls-sa-east-1-002</span><span class="instance-ip">10177114242</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-stepca-prod-mtpls-sa-east-1-001</span><span class="instance-ip">10177112231</span></div>
-                </div>
                 <div class="card-footer">
-                    <span>📁 AWS • Servidor Integrador 2 (Clique para ver instâncias)</span>
+                    <span>📁 AWS • Servidor Integrador 2</span>
                 </div>
             </div>
 
             <!-- 4. Softcom -->
-            <div class="card" onclick="toggleCard(this)">
-                <div class="card-header" style="width: 100%;">
-                    <h3>Ambiente - Softcom <span class="toggle-icon">▼</span></h3>
-                    <div class="links-list" onclick="event.stopPropagation()">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Ambiente - Softcom</h3>
+                    <div class="links-list">
                         <a href="https://scope-portal-integrador1.conexao-tech.com/portal/" class="btn-link" target="_blank">Portal Principal <span class="tag">Portal</span></a>
                         <a href="https://scope-portal-integrador1.conexao-tech.com/adm" class="btn-link" target="_blank">Painel Administrativo <span class="tag">ADM</span></a>
                         <a href="https://scope-portal-integrador1.conexao-tech.com/console/" class="btn-link" target="_blank">Console de Operações <span class="tag">Console</span></a>
                     </div>
                 </div>
-                <div class="instances-container">
-                    <div class="instances-title">Instâncias e IPs Associados</div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopepsw-prod-softcom-sa-east-1-001</span><span class="instance-ip">10.177.80.113</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopepsw-prod-softcom-sa-east-1-002</span><span class="instance-ip">10.177.82.100</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-casi-prod-softcom-sa-east-1-001</span><span class="instance-ip">10.177.81.30</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-casi-prod-softcom-sa-east-1-002</span><span class="instance-ip">10.177.83.52</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopesrv-prod-softcom-sa-east-1-001</span><span class="instance-ip">10.177.80.20</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopesrv-prod-softcom-sa-east-1-002</span><span class="instance-ip">10.177.82.47</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopesrv-prod-softcom-sa-east-1-003</span><span class="instance-ip">10.177.84.5</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopeportal-prod-softcom-sa-east-1-001</span><span class="instance-ip">10.177.80.201</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopeportal-prod-softcom-sa-east-1-002</span><span class="instance-ip">10.177.80.240</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-softcom-sa-east-1-001</span><span class="instance-ip">10.177.33.61</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-softcom-sa-east-1-002</span><span class="instance-ip">10.177.33.110</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-softcom-sa-east-1-003</span><span class="instance-ip">10.177.33.39</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopeconsole-prod-intg-sa-east-1-001</span><span class="instance-ip">10.177.80.30</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-tokenservice-prod-softcom-sa-east-1-001</span><span class="instance-ip">10.177.80.211</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-tokenservice-prod-softcom-sa-east-1-002</span><span class="instance-ip">10.177.82.239</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-stepca-prod-softcom-sa-east-1-001</span><span class="instance-ip">10.177.80.209</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-stepca-prod-softcom-sa-east-1-002-DisasterRecovery</span><span class="instance-ip">10.177.82.232</span></div>
-                </div>
                 <div class="card-footer">
-                    <span>📁 AWS • Servidor Integrador 1 (Clique para ver instâncias)</span>
+                    <span>📁 AWS • Servidor Integrador 1</span>
                 </div>
             </div>
 
             <!-- 5. Compartilhado -->
-            <div class="card" onclick="toggleCard(this)">
-                <div class="card-header" style="width: 100%;">
-                    <h3>Ambiente - Compartilhado <span class="toggle-icon">▼</span></h3>
-                    <div class="links-list" onclick="event.stopPropagation()">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Ambiente - Compartilhado</h3>
+                    <div class="links-list">
                         <a href="https://scope-portal-integradores.conexao-tech.com/portal/" class="btn-link" target="_blank">Portal Principal <span class="tag">Portal</span></a>
                         <a href="https://scope-portal-integradores.conexao-tech.com/adm" class="btn-link" target="_blank">Painel Administrativo <span class="tag">ADM</span></a>
                         <a href="https://scope-portal-integradores.conexao-tech.com/console/" class="btn-link" target="_blank">Console de Operações <span class="tag">Console</span></a>
                     </div>
                 </div>
-                <div class="instances-container">
-                    <div class="instances-title">Instâncias e IPs Associados</div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopepsw-prod-cmptd-sa-east-1-001</span><span class="instance-ip">10.177.80.94</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopepsw-prod-cmptd-sa-east-1-002</span><span class="instance-ip">10.177.82.96</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-casi-prod-intg-sa-east-1-001</span><span class="instance-ip">10.177.81.8</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-casi-prod-intg-sa-east-1-002</span><span class="instance-ip">10.177.83.60</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopesrv-prod-cmptd-sa-east-1-001</span><span class="instance-ip">10.177.80.9</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopesrv-prod-cmptd-sa-east-1-002</span><span class="instance-ip">10.177.82.30</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopesrv-prod-cmptd-sa-east-1-003</span><span class="instance-ip">10.177.84.38</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopeportal-prod-cmptd-sa-east-1-001</span><span class="instance-ip">10.177.80.230</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopeportal-prod-cmptd-sa-east-1-002</span><span class="instance-ip">10.177.80.225</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-cmptl-sa-east-1-001</span><span class="instance-ip">10.177.33.55</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-cmptl-sa-east-1-002</span><span class="instance-ip">10.177.33.125</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-cmptl-sa-east-1-003</span><span class="instance-ip">10.177.33.185</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-cmptl-sa-east-1-004</span><span class="instance-ip">10.177.33.35</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopeconsole-prod-cmptd-sa-east-1-001</span><span class="instance-ip">10.177.80.25</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-tokenservice-prod-cmptd-sa-east-1-001</span><span class="instance-ip">10.177.80.208</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-tokenservice-prod-cmptd-sa-east-1-002</span><span class="instance-ip">10.177.82.201</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-stepca-prod-cmptd-sa-east-1-001</span><span class="instance-ip">10.177.80.250</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-stepca-prod-cmptd-sa-east-1-002-disasterrecovery</span><span class="instance-ip">10.177.82.215</span></div>
-                </div>
                 <div class="card-footer">
-                    <span>📁 AWS • Servidor Integradores (Clique para ver instâncias)</span>
+                    <span>📁 AWS • Servidor Integradores</span>
                 </div>
             </div>
 
             <!-- 6. Elgin -->
-            <div class="card" onclick="toggleCard(this)">
-                <div class="card-header" style="width: 100%;">
-                    <h3>Ambiente - Elgin <span class="toggle-icon">▼</span></h3>
-                    <div class="links-list" onclick="event.stopPropagation()">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Ambiente - Elgin</h3>
+                    <div class="links-list">
                         <a href="https://scope-portal-integrador3.conexao-tech.com/portal/" class="btn-link" target="_blank">Portal Principal <span class="tag">Portal</span></a>
                         <a href="https://scope-portal-integrador3.conexao-tech.com/adm" class="btn-link" target="_blank">Painel Administrativo <span class="tag">ADM</span></a>
                         <a href="https://scope-portal-integrador3.conexao-tech.com/console/" class="btn-link" target="_blank">Console de Operações <span class="tag">Console</span></a>
                     </div>
                 </div>
-                <div class="instances-container">
-                    <div class="instances-title">Instâncias e IPs Associados</div>
-                    <div class="instance-item"><span class="instance-name">ec2-scppsw-elgin-prd-001</span><span class="instance-ip">10177225202</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scppsw-elgin-prd-002</span><span class="instance-ip">10.177.226.51</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-casi-elgin-prd-001</span><span class="instance-ip">10.177.224.22</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-casi-elgin-prd-002</span><span class="instance-ip">10177224126</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpsrv-elgin-prd-001</span><span class="instance-ip">10177224138</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpsrv-elgin-prd-002</span><span class="instance-ip">10177224225</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpsrv-elgin-prd-003</span><span class="instance-ip">10.177.225.46</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpprtl-elgin-prd-001</span><span class="instance-ip">10177225115</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpprtl-elgin-prd-002</span><span class="instance-ip">10177225181</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-elgin-sa-east-1-001</span><span class="instance-ip">10.177.33.38</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-elgin-sa-east-1-002</span><span class="instance-ip">10.177.33.92</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-elgin-sa-east-1-003</span><span class="instance-ip">10.177.33.151</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpcnsl-elgin-prd-001</span><span class="instance-ip">10177224158</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-tknsvc-elgin-prd-001</span><span class="instance-ip">10177225107</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-tknsvc-elgin-prd-002</span><span class="instance-ip">10177225172</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-stpca-elgin-prd-001</span><span class="instance-ip">10177225119</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-stpca-elgin-prd-002-disasterrecovery</span><span class="instance-ip">10177225182</span></div>
-                </div>
                 <div class="card-footer">
-                    <span>📁 AWS • Servidor Integrador 3 (Clique para ver instâncias)</span>
+                    <span>📁 AWS • Servidor Integrador 3</span>
                 </div>
             </div>
 
             <!-- 7. Linear Sistemas -->
-            <div class="card" onclick="toggleCard(this)">
-                <div class="card-header" style="width: 100%;">
-                    <h3>Ambiente - Linear Sistemas <span class="toggle-icon">▼</span></h3>
-                    <div class="links-list" onclick="event.stopPropagation()">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Ambiente - Linear Sistemas</h3>
+                    <div class="links-list">
                         <a href="https://scope-portal-integrador6.conexao-tech.com/portal/" class="btn-link" target="_blank">Portal Principal <span class="tag">Portal</span></a>
                         <a href="https://scope-portal-integrador6.conexao-tech.com/adm" class="btn-link" target="_blank">Painel Administrativo <span class="tag">ADM</span></a>
                         <a href="https://scope-portal-integrador6.conexao-tech.com/console/" class="btn-link" target="_blank">Console de Operações <span class="tag">Console</span></a>
                     </div>
                 </div>
-                <div class="instances-container">
-                    <div class="instances-title">Instâncias e IPs Associados</div>
-                    <div class="instance-item"><span class="instance-name">ec2-scppsw-linear-prd-001</span><span class="instance-ip">10.177.80.89</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scppsw-linear-prd-002</span><span class="instance-ip">10.177.82.114</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-casi-linear-prd-001</span><span class="instance-ip">10.177.83.15</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-casi-linear-prd-002</span><span class="instance-ip">10.177.81.61</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpsrv-linear-prd-001</span><span class="instance-ip">10.177.80.40</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpsrv-linear-prd-002</span><span class="instance-ip">10.177.82.54</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpsrv-linear-prd-003</span><span class="instance-ip">10.177.84.33</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpprtl-linear-prd-001</span><span class="instance-ip">10.177.80.237</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpprtl-linear-prd-002</span><span class="instance-ip">10.177.80.252</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-linear-sa-east-1-001</span><span class="instance-ip">10.177.33.34</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-linear-sa-east-1-002</span><span class="instance-ip">10.177.33.118</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scopegw-linear-sa-east-1-003</span><span class="instance-ip">10.177.33.171</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-scpcnsl-linear-prd-001</span><span class="instance-ip">10.177.80.24</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-tknsvc-linear-prd-001</span><span class="instance-ip">10.177.80.199</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-tknsvc-linear-prd-002</span><span class="instance-ip">10.177.82.228</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-stpca-linear-prd-001</span><span class="instance-ip">10.177.80.210</span></div>
-                    <div class="instance-item"><span class="instance-name">ec2-stpca-linear-prd-002-disasterrecovery</span><span class="instance-ip">10.177.82.230</span></div>
-                </div>
                 <div class="card-footer">
-                    <span>📁 AWS • Servidor Integrador 6 (Clique para ver instâncias)</span>
+                    <span>📁 AWS • Servidor Integrador 6</span>
                 </div>
             </div>
 
         </div>
     </div>
-
-    <script>
-        function toggleCard(card) {
-            // Alterna a classe 'active' no card clicado
-            card.classList.toggle('active');
-        }
-    </script>
 
 </body>
 </html>
