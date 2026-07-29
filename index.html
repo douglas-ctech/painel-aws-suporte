@@ -53,22 +53,24 @@
             background: var(--primary-blue);
             color: #FFFFFF;
             border: none;
-            padding: 8px 16px;
+            padding: 10px 16px;
             border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
             font-size: 13px;
             display: none;
-            transition: background 0.2s;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .back-btn:hover {
             background: #08294d;
+            transform: translateY(-1px);
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 20px;
         }
 
@@ -83,6 +85,7 @@
             flex-direction: column;
             justify-content: space-between;
             cursor: pointer;
+            min-height: 120px;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
@@ -92,89 +95,80 @@
         }
 
         .card-header h3 {
-            margin: 0 0 15px 0;
+            margin: 0 0 10px 0;
             color: var(--primary-blue);
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
-            border-bottom: 1px solid #EDF2F7;
-            padding-bottom: 10px;
-        }
-
-        .links-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .btn-link {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #F1F5F9;
-            color: var(--primary-blue);
-            padding: 10px 14px;
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 600;
-            transition: background 0.2s, color 0.2s;
-        }
-
-        .btn-link:hover {
-            background: var(--primary-blue);
-            color: #FFFFFF;
-        }
-
-        .btn-link span.tag {
-            background: #E2E8F0;
-            color: #475569;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 11px;
-            text-transform: uppercase;
-        }
-
-        .btn-link:hover span.tag {
-            background: rgba(255, 255, 255, 0.2);
-            color: #FFFFFF;
         }
 
         .card-footer {
-            font-size: 12px;
+            font-size: 13px;
             color: var(--text-muted);
             border-top: 1px solid #EDF2F7;
-            padding-top: 10px;
+            padding-top: 15px;
             display: flex;
             align-items: center;
             gap: 6px;
+            font-weight: 500;
         }
 
         /* Estilo da tela de detalhes */
         .details-view {
             display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .action-bar {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 25px;
             flex-wrap: wrap;
         }
 
-        .action-bar a {
-            background: var(--primary-blue);
-            color: white;
-            padding: 10px 18px;
-            border-radius: 6px;
+        .btn-action {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #F1F5F9;
+            color: var(--primary-blue);
+            padding: 12px 18px;
             text-decoration: none;
-            font-weight: 600;
+            border-radius: 8px;
             font-size: 13px;
-            transition: background 0.2s;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.2s ease;
         }
 
-        .action-bar a:hover {
-            background: #08294d;
+        .btn-action:hover {
+            background: var(--primary-blue);
+            color: #FFFFFF;
+            border-color: var(--primary-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(10, 54, 99, 0.2);
+        }
+
+        .btn-action span.tag {
+            background: #E2E8F0;
+            color: #475569;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-left: 12px;
+            font-weight: 700;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .btn-action:hover span.tag {
+            background: rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
         }
 
         .table-container {
@@ -193,7 +187,7 @@
         }
 
         th, td {
-            padding: 14px 20px;
+            padding: 16px 20px;
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -201,14 +195,25 @@
             background-color: #F8FAFC;
             color: var(--primary-blue);
             font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         tr:last-child td {
             border-bottom: none;
         }
 
+        tr {
+            transition: background-color 0.15s ease;
+        }
+
         tr:hover {
-            background-color: #F1F5F9;
+            background-color: #F8FAFC;
+        }
+
+        td strong {
+            color: var(--primary-blue);
         }
     </style>
 </head>
@@ -230,11 +235,6 @@
             <div class="card" onclick="abrirDetalhes('Procfit')">
                 <div class="card-header">
                     <h3>Ambiente - Procfit</h3>
-                    <div class="links-list" onclick="event.stopPropagation()">
-                        <a href="https://scope-portal-integrador4.conexao-tech.com/portal/" class="btn-link" target="_blank">Portal Principal <span class="tag">Portal</span></a>
-                        <a href="https://scope-portal-integrador4.conexao-tech.com/adm" class="btn-link" target="_blank">Painel Administrativo <span class="tag">ADM</span></a>
-                        <a href="https://scope-portal-integrador4.conexao-tech.com/console/" class="btn-link" target="_blank">Console de Operações <span class="tag">Console</span></a>
-                    </div>
                 </div>
                 <div class="card-footer">
                     <span>📁 AWS • Servidor Integrador 4</span>
@@ -245,11 +245,6 @@
             <div class="card" onclick="abrirDetalhes('Arius')">
                 <div class="card-header">
                     <h3>Ambiente - Arius</h3>
-                    <div class="links-list" onclick="event.stopPropagation()">
-                        <a href="https://scope-portal-integrador5.conexao-tech.com/portal/" class="btn-link" target="_blank">Portal Principal <span class="tag">Portal</span></a>
-                        <a href="https://scope-portal-integrador5.conexao-tech.com/adm" class="btn-link" target="_blank">Painel Administrativo <span class="tag">ADM</span></a>
-                        <a href="https://scope-portal-integrador5.conexao-tech.com/console/" class="btn-link" target="_blank">Console de Operações <span class="tag">Console</span></a>
-                    </div>
                 </div>
                 <div class="card-footer">
                     <span>📁 AWS • Servidor Integrador 5</span>
@@ -260,11 +255,6 @@
             <div class="card" onclick="abrirDetalhes('MultiplusCard')">
                 <div class="card-header">
                     <h3>Ambiente - MultiplusCard</h3>
-                    <div class="links-list" onclick="event.stopPropagation()">
-                        <a href="https://scope-portal-integrador2.conexao-tech.com/portal/" class="btn-link" target="_blank">Portal Principal <span class="tag">Portal</span></a>
-                        <a href="https://scope-portal-integrador2.conexao-tech.com/adm" class="btn-link" target="_blank">Painel Administrativo <span class="tag">ADM</span></a>
-                        <a href="https://scope-portal-integrador2.conexao-tech.com/console/" class="btn-link" target="_blank">Console de Operações <span class="tag">Console</span></a>
-                    </div>
                 </div>
                 <div class="card-footer">
                     <span>📁 AWS • Servidor Integrador 2</span>
@@ -275,11 +265,6 @@
             <div class="card" onclick="abrirDetalhes('Softcom')">
                 <div class="card-header">
                     <h3>Ambiente - Softcom</h3>
-                    <div class="links-list" onclick="event.stopPropagation()">
-                        <a href="https://scope-portal-integrador1.conexao-tech.com/portal/" class="btn-link" target="_blank">Portal Principal <span class="tag">Portal</span></a>
-                        <a href="https://scope-portal-integrador1.conexao-tech.com/adm" class="btn-link" target="_blank">Painel Administrativo <span class="tag">ADM</span></a>
-                        <a href="https://scope-portal-integrador1.conexao-tech.com/console/" class="btn-link" target="_blank">Console de Operações <span class="tag">Console</span></a>
-                    </div>
                 </div>
                 <div class="card-footer">
                     <span>📁 AWS • Servidor Integrador 1</span>
@@ -290,11 +275,6 @@
             <div class="card" onclick="abrirDetalhes('Compartilhado')">
                 <div class="card-header">
                     <h3>Ambiente - Compartilhado</h3>
-                    <div class="links-list" onclick="event.stopPropagation()">
-                        <a href="https://scope-portal-integradores.conexao-tech.com/portal/" class="btn-link" target="_blank">Portal Principal <span class="tag">Portal</span></a>
-                        <a href="https://scope-portal-integradores.conexao-tech.com/adm" class="btn-link" target="_blank">Painel Administrativo <span class="tag">ADM</span></a>
-                        <a href="https://scope-portal-integradores.conexao-tech.com/console/" class="btn-link" target="_blank">Console de Operações <span class="tag">Console</span></a>
-                    </div>
                 </div>
                 <div class="card-footer">
                     <span>📁 AWS • Servidor Integradores</span>
@@ -305,11 +285,6 @@
             <div class="card" onclick="abrirDetalhes('Elgin')">
                 <div class="card-header">
                     <h3>Ambiente - Elgin</h3>
-                    <div class="links-list" onclick="event.stopPropagation()">
-                        <a href="https://scope-portal-integrador3.conexao-tech.com/portal/" class="btn-link" target="_blank">Portal Principal <span class="tag">Portal</span></a>
-                        <a href="https://scope-portal-integrador3.conexao-tech.com/adm" class="btn-link" target="_blank">Painel Administrativo <span class="tag">ADM</span></a>
-                        <a href="https://scope-portal-integrador3.conexao-tech.com/console/" class="btn-link" target="_blank">Console de Operações <span class="tag">Console</span></a>
-                    </div>
                 </div>
                 <div class="card-footer">
                     <span>📁 AWS • Servidor Integrador 3</span>
@@ -320,11 +295,6 @@
             <div class="card" onclick="abrirDetalhes('Linear Sistemas')">
                 <div class="card-header">
                     <h3>Ambiente - Linear Sistemas</h3>
-                    <div class="links-list" onclick="event.stopPropagation()">
-                        <a href="https://scope-portal-integrador6.conexao-tech.com/portal/" class="btn-link" target="_blank">Portal Principal <span class="tag">Portal</span></a>
-                        <a href="https://scope-portal-integrador6.conexao-tech.com/adm" class="btn-link" target="_blank">Painel Administrativo <span class="tag">ADM</span></a>
-                        <a href="https://scope-portal-integrador6.conexao-tech.com/console/" class="btn-link" target="_blank">Console de Operações <span class="tag">Console</span></a>
-                    </div>
                 </div>
                 <div class="card-footer">
                     <span>📁 AWS • Servidor Integrador 6</span>
@@ -510,12 +480,12 @@
             document.getElementById('main-title').innerText = `Ambiente - ${nomeAmbiente}`;
             document.getElementById('main-subtitle').innerText = `Relação de Instâncias e Endereços IP`;
 
-            // Preenche barra de botões rápidos
+            // Preenche barra de botões rápidos com visual melhorado
             const actionBar = document.getElementById('action-bar');
             actionBar.innerHTML = `
-                <a href="${ambiente.urlBase}/portal/" target="_blank">Portal Principal</a>
-                <a href="${ambiente.urlBase}/adm" target="_blank">Painel Administrativo</a>
-                <a href="${ambiente.urlBase}/console/" target="_blank">Console de Operações</a>
+                <a href="${ambiente.urlBase}/portal/" target="_blank" class="btn-action">Portal Principal <span class="tag">Portal</span></a>
+                <a href="${ambiente.urlBase}/adm" target="_blank" class="btn-action">Painel Administrativo <span class="tag">ADM</span></a>
+                <a href="${ambiente.urlBase}/console/" target="_blank" class="btn-action">Console de Operações <span class="tag">Console</span></a>
             `;
 
             // Preenche a tabela ignorando a coluna Hostname
