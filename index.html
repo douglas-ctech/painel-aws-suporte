@@ -32,9 +32,12 @@
             margin-bottom: 30px;
             border-bottom: 2px solid var(--border-color);
             padding-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        h1 {
+        .header-titles h1 {
             color: var(--primary-blue);
             font-size: 26px;
             margin: 0 0 5px 0;
@@ -44,6 +47,23 @@
             color: var(--text-muted);
             font-size: 14px;
             margin: 0;
+        }
+
+        .back-btn {
+            background: var(--primary-blue);
+            color: #FFFFFF;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            display: none;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #08294d;
         }
 
         .grid {
@@ -62,6 +82,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            cursor: pointer;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
@@ -128,23 +149,88 @@
             align-items: center;
             gap: 6px;
         }
+
+        /* Estilo da tela de detalhes */
+        .details-view {
+            display: none;
+        }
+
+        .action-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .action-bar a {
+            background: var(--primary-blue);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            transition: background 0.2s;
+        }
+
+        .action-bar a:hover {
+            background: #08294d;
+        }
+
+        .table-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #F8FAFC;
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background-color: #F1F5F9;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
         <header>
-            <h1>Painel de Acesso - Ambientes AWS</h1>
-            <p class="subtitle">Central de links rápidos </p>
+            <div class="header-titles">
+                <h1 id="main-title">Painel de Acesso - Ambientes AWS</h1>
+                <p id="main-subtitle" class="subtitle">Central de links rápidos</p>
+            </div>
+            <button id="backButton" class="back-btn" onclick="voltarHome()">← Voltar ao Início</button>
         </header>
         
-        <div class="grid">
+        <!-- VISÃO GERAL (CARDS) -->
+        <div id="home-view" class="grid">
             
             <!-- 1. Procfit -->
-            <div class="card">
+            <div class="card" onclick="abrirDetalhes('Procfit')">
                 <div class="card-header">
                     <h3>Ambiente - Procfit</h3>
-                    <div class="links-list">
+                    <div class="links-list" onclick="event.stopPropagation()">
                         <a href="https://scope-portal-integrador4.conexao-tech.com/portal/" class="btn-link" target="_blank">Portal Principal <span class="tag">Portal</span></a>
                         <a href="https://scope-portal-integrador4.conexao-tech.com/adm" class="btn-link" target="_blank">Painel Administrativo <span class="tag">ADM</span></a>
                         <a href="https://scope-portal-integrador4.conexao-tech.com/console/" class="btn-link" target="_blank">Console de Operações <span class="tag">Console</span></a>
@@ -156,10 +242,10 @@
             </div>
 
             <!-- 2. Arius -->
-            <div class="card">
+            <div class="card" onclick="abrirDetalhes('Arius')">
                 <div class="card-header">
                     <h3>Ambiente - Arius</h3>
-                    <div class="links-list">
+                    <div class="links-list" onclick="event.stopPropagation()">
                         <a href="https://scope-portal-integrador5.conexao-tech.com/portal/" class="btn-link" target="_blank">Portal Principal <span class="tag">Portal</span></a>
                         <a href="https://scope-portal-integrador5.conexao-tech.com/adm" class="btn-link" target="_blank">Painel Administrativo <span class="tag">ADM</span></a>
                         <a href="https://scope-portal-integrador5.conexao-tech.com/console/" class="btn-link" target="_blank">Console de Operações <span class="tag">Console</span></a>
@@ -171,10 +257,10 @@
             </div>
 
             <!-- 3. MultiplusCard -->
-            <div class="card">
+            <div class="card" onclick="abrirDetalhes('MultiplusCard')">
                 <div class="card-header">
                     <h3>Ambiente - MultiplusCard</h3>
-                    <div class="links-list">
+                    <div class="links-list" onclick="event.stopPropagation()">
                         <a href="https://scope-portal-integrador2.conexao-tech.com/portal/" class="btn-link" target="_blank">Portal Principal <span class="tag">Portal</span></a>
                         <a href="https://scope-portal-integrador2.conexao-tech.com/adm" class="btn-link" target="_blank">Painel Administrativo <span class="tag">ADM</span></a>
                         <a href="https://scope-portal-integrador2.conexao-tech.com/console/" class="btn-link" target="_blank">Console de Operações <span class="tag">Console</span></a>
@@ -186,10 +272,10 @@
             </div>
 
             <!-- 4. Softcom -->
-            <div class="card">
+            <div class="card" onclick="abrirDetalhes('Softcom')">
                 <div class="card-header">
                     <h3>Ambiente - Softcom</h3>
-                    <div class="links-list">
+                    <div class="links-list" onclick="event.stopPropagation()">
                         <a href="https://scope-portal-integrador1.conexao-tech.com/portal/" class="btn-link" target="_blank">Portal Principal <span class="tag">Portal</span></a>
                         <a href="https://scope-portal-integrador1.conexao-tech.com/adm" class="btn-link" target="_blank">Painel Administrativo <span class="tag">ADM</span></a>
                         <a href="https://scope-portal-integrador1.conexao-tech.com/console/" class="btn-link" target="_blank">Console de Operações <span class="tag">Console</span></a>
@@ -201,10 +287,10 @@
             </div>
 
             <!-- 5. Compartilhado -->
-            <div class="card">
+            <div class="card" onclick="abrirDetalhes('Compartilhado')">
                 <div class="card-header">
                     <h3>Ambiente - Compartilhado</h3>
-                    <div class="links-list">
+                    <div class="links-list" onclick="event.stopPropagation()">
                         <a href="https://scope-portal-integradores.conexao-tech.com/portal/" class="btn-link" target="_blank">Portal Principal <span class="tag">Portal</span></a>
                         <a href="https://scope-portal-integradores.conexao-tech.com/adm" class="btn-link" target="_blank">Painel Administrativo <span class="tag">ADM</span></a>
                         <a href="https://scope-portal-integradores.conexao-tech.com/console/" class="btn-link" target="_blank">Console de Operações <span class="tag">Console</span></a>
@@ -216,10 +302,10 @@
             </div>
 
             <!-- 6. Elgin -->
-            <div class="card">
+            <div class="card" onclick="abrirDetalhes('Elgin')">
                 <div class="card-header">
                     <h3>Ambiente - Elgin</h3>
-                    <div class="links-list">
+                    <div class="links-list" onclick="event.stopPropagation()">
                         <a href="https://scope-portal-integrador3.conexao-tech.com/portal/" class="btn-link" target="_blank">Portal Principal <span class="tag">Portal</span></a>
                         <a href="https://scope-portal-integrador3.conexao-tech.com/adm" class="btn-link" target="_blank">Painel Administrativo <span class="tag">ADM</span></a>
                         <a href="https://scope-portal-integrador3.conexao-tech.com/console/" class="btn-link" target="_blank">Console de Operações <span class="tag">Console</span></a>
@@ -231,10 +317,10 @@
             </div>
 
             <!-- 7. Linear Sistemas -->
-            <div class="card">
+            <div class="card" onclick="abrirDetalhes('Linear Sistemas')">
                 <div class="card-header">
                     <h3>Ambiente - Linear Sistemas</h3>
-                    <div class="links-list">
+                    <div class="links-list" onclick="event.stopPropagation()">
                         <a href="https://scope-portal-integrador6.conexao-tech.com/portal/" class="btn-link" target="_blank">Portal Principal <span class="tag">Portal</span></a>
                         <a href="https://scope-portal-integrador6.conexao-tech.com/adm" class="btn-link" target="_blank">Painel Administrativo <span class="tag">ADM</span></a>
                         <a href="https://scope-portal-integrador6.conexao-tech.com/console/" class="btn-link" target="_blank">Console de Operações <span class="tag">Console</span></a>
@@ -246,7 +332,218 @@
             </div>
 
         </div>
+
+        <!-- VISÃO DE DETALHES (IPs E INSTÂNCIAS) -->
+        <div id="details-view" class="details-view">
+            <div id="action-bar" class="action-bar"></div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Instância</th>
+                            <th>Endereço IP</th>
+                        </tr>
+                    </thead>
+                    <tbody id="details-tbody">
+                        <!-- Preenchido via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
+    <script>
+        // Dados extraídos da planilha para cada ambiente
+        const dadosAmbientes = {
+            "Procfit": {
+                urlBase: "https://scope-portal-integrador4.conexao-tech.com",
+                ips: [
+                    "10.177.80.115", "10.177.82.76", "10.177.83.29", "10.177.81.28", 
+                    "10.177.80.7", "10.177.82.18", "10.177.84.60", "10.177.80.239", 
+                    "10.177.80.207", "10.177.33.45", "10.177.33.85", "10.177.33.159", 
+                    "10.177.80.51", "10.177.80.235", "10.177.82.250", "10.177.80.224", "10.177.82.248"
+                ],
+                instancias: [
+                    "ec2-scppsw-procfit-prd-001", "ec2-scppsw-procfit-prd-002", 
+                    "ec2-casi-procfit-prd-001", "ec2-casi-procfit-prd-002", 
+                    "ec2-scpsrv-procfit-prd-001", "ec2-scpsrv-procfit-prd-002", 
+                    "ec2-scpsrv-procfit-prd-003", "ec2-scpprtl-procfit-prd-001", 
+                    "ec2-scpprtl-procfit-prd-002", "ec2-scopegw-procfit-new-sa-east-1-001", 
+                    "ec2-scopegw-procfit-new-sa-east-1-002", "ec2-scopegw-procfit-new-sa-east-1-003", 
+                    "ec2-scpcnsl-procfit-prd-001", "ec2-tknsvc-procfit-prd-001", 
+                    "ec2-tknsvc-procfit-prd-002", "ec2-stpca-procfit-prd-001", 
+                    "ec2-stpca-procfit-prd-002-disasterrecovery"
+                ]
+            },
+            "Arius": {
+                urlBase: "https://scope-portal-integrador5.conexao-tech.com",
+                ips: [
+                    "10.177.80.73", "10.177.82.78", "10.177.83.30", "10.177.81.40", 
+                    "10.177.80.61", "10.177.82.35", "10.177.84.10", "10.177.80.227", 
+                    "10.177.80.248", "10.177.33.59", "10.177.33.117", "10.177.33.150", 
+                    "10.177.80.43", "10.177.80.196", "10.177.82.229", "10.177.80.197", "10.177.82.216"
+                ],
+                instancias: [
+                    "ec2-scppsw-arius-prd-001", "ec2-scppsw-arius-prd-002", 
+                    "ec2-casi-arius-prd-001", "ec2-casi-arius-prd-002", 
+                    "ec2-scpsrv-arius-prd-001", "ec2-scpsrv-arius-prd-002", 
+                    "ec2-scpsrv-arius-prd-003", "ec2-scpprtl-arius-prd-001", 
+                    "ec2-scpprtl-arius-prd-002", "ec2-scopegw-arius-sa-east-1-001", 
+                    "ec2-scopegw-arius-sa-east-1-002", "ec2-scopegw-arius-sa-east-1-003", 
+                    "ec2-scpcnsl-arius-prd-001", "ec2-tknsvc-arius-prd-001", 
+                    "ec2-tknsvc-arius-prd-002", "ec2-stpca-arius-prd-001", 
+                    "ec2-stpca-arius-prd-002-disasterrecovery"
+                ]
+            },
+            "MultiplusCard": {
+                urlBase: "https://scope-portal-integrador2.conexao-tech.com",
+                ips: [
+                    "10.177.112.82", "10.177.114.91", "10.177.113.47", "10.177.115.10", 
+                    "10.177.112.33", "10.177.114.16", "10.177.116.57", "10177112209", 
+                    "10177114244", "10.177.33.23", "10.177.33.75", "10.177.33.187", 
+                    "10.177.112.22", "10177112198", "10177114242", "10177112231", "-"
+                ],
+                instancias: [
+                    "ec2-scopepsw-prod-mtpls-sa-east-1-001", "ec2-scopepsw-prod-mtpls-sa-east-1-002", 
+                    "ec2-casi-prod-mtpls-sa-east-1-001", "ec2-casi-prod-mtpls-sa-east-1-002", 
+                    "ec2-scopesrv-prod-mtpls-sa-east-1-001", "ec2-scopesrv-prod-mtpls-sa-east-1-002", 
+                    "ec2-scopesrv-prod-mtpls-sa-east-1-003", "ec2-scopeportal-prod-mtpls-sa-east-1-001", 
+                    "ec2-scopeportal-prod-mtpls-sa-east-1-002", "ec2-scopegw-multiplus-sa-east-1-001", 
+                    "ec2-scopegw-multiplus-sa-east-1-002", "ec2-scopegw-multiplus-sa-east-1-003", 
+                    "ec2-scopeconsole-prod-mtpls-sa-east-1-001", "ec2-tokenservice-prod-mtpls-sa-east-1-001", 
+                    "ec2-tokenservice-prod-mtpls-sa-east-1-002", "ec2-stepca-prod-mtpls-sa-east-1-001", "-"
+                ]
+            },
+            "Softcom": {
+                urlBase: "https://scope-portal-integrador1.conexao-tech.com",
+                ips: [
+                    "10.177.80.113", "10.177.82.100", "10.177.81.30", "10.177.83.52", 
+                    "10.177.80.20", "10.177.82.47", "10.177.84.5", "10.177.80.201", 
+                    "10.177.80.240", "10.177.33.61", "10.177.33.110", "10.177.33.39", 
+                    "10.177.80.30", "10.177.80.211", "10.177.82.239", "10.177.80.209", "10.177.82.232"
+                ],
+                instancias: [
+                    "ec2-scopepsw-prod-softcom-sa-east-1-001", "ec2-scopepsw-prod-softcom-sa-east-1-002", 
+                    "ec2-casi-prod-softcom-sa-east-1-001", "ec2-casi-prod-softcom-sa-east-1-002", 
+                    "ec2-scopesrv-prod-softcom-sa-east-1-001", "ec2-scopesrv-prod-softcom-sa-east-1-002", 
+                    "ec2-scopesrv-prod-softcom-sa-east-1-003", "ec2-scopeportal-prod-softcom-sa-east-1-001", 
+                    "ec2-scopeportal-prod-softcom-sa-east-1-002", "ec2-scopegw-softcom-sa-east-1-001", 
+                    "ec2-scopegw-softcom-sa-east-1-002", "ec2-scopegw-softcom-sa-east-1-003", 
+                    "ec2-scopeconsole-prod-intg-sa-east-1-001", "ec2-tokenservice-prod-softcom-sa-east-1-001", 
+                    "ec2-tokenservice-prod-softcom-sa-east-1-002", "ec2-stepca-prod-softcom-sa-east-1-001", 
+                    "ec2-stepca-prod-softcom-sa-east-1-002-DisasterRecovery"
+                ]
+            },
+            "Compartilhado": {
+                urlBase: "https://scope-portal-integradores.conexao-tech.com",
+                ips: [
+                    "10.177.80.94", "10.177.82.96", "10.177.81.8", "10.177.83.60", 
+                    "10.177.80.9", "10.177.82.30", "10.177.84.38", "10.177.80.230", 
+                    "10.177.80.225", "10.177.33.55", "10.177.33.125", "10.177.33.185", 
+                    "10.177.33.35", "10.177.80.25", "10.177.80.208", "10.177.82.201", 
+                    "10.177.80.250", "10.177.82.215"
+                ],
+                instancias: [
+                    "ec2-scopepsw-prod-cmptd-sa-east-1-001", "ec2-scopepsw-prod-cmptd-sa-east-1-002", 
+                    "ec2-casi-prod-intg-sa-east-1-001", "ec2-casi-prod-intg-sa-east-1-002", 
+                    "ec2-scopesrv-prod-cmptd-sa-east-1-001", "ec2-scopesrv-prod-cmptd-sa-east-1-002", 
+                    "ec2-scopesrv-prod-cmptd-sa-east-1-003", "ec2-scopeportal-prod-cmptd-sa-east-1-001", 
+                    "ec2-scopeportal-prod-cmptd-sa-east-1-002", "ec2-scopegw-cmptl-sa-east-1-001", 
+                    "ec2-scopegw-cmptl-sa-east-1-002", "ec2-scopegw-cmptl-sa-east-1-003", 
+                    "ec2-scopegw-cmptl-sa-east-1-004", "ec2-scopeconsole-prod-cmptd-sa-east-1-001", 
+                    "ec2-tokenservice-prod-cmptd-sa-east-1-001", "ec2-tokenservice-prod-cmptd-sa-east-1-002", 
+                    "ec2-stepca-prod-cmptd-sa-east-1-001", "ec2-stepca-prod-cmptd-sa-east-1-002-disasterrecovery"
+                ]
+            },
+            "Elgin": {
+                urlBase: "https://scope-portal-integrador3.conexao-tech.com",
+                ips: [
+                    "10177225202", "10.177.226.51", "10.177.224.22", "10177224126", 
+                    "10177224138", "10177224225", "10.177.225.46", "10177225115", 
+                    "10177225181", "10.177.33.38", "10.177.33.92", "10.177.33.151", 
+                    "10177224158", "10177225107", "10177225172", "10177225119", "10177225182"
+                ],
+                instancias: [
+                    "ec2-scppsw-elgin-prd-001", "ec2-scppsw-elgin-prd-002", 
+                    "ec2-casi-elgin-prd-001", "ec2-casi-elgin-prd-002", 
+                    "ec2-scpsrv-elgin-prd-001", "ec2-scpsrv-elgin-prd-002", 
+                    "ec2-scpsrv-elgin-prd-003", "ec2-scpprtl-elgin-prd-001", 
+                    "ec2-scpprtl-elgin-prd-002", "ec2-scopegw-elgin-sa-east-1-001", 
+                    "ec2-scopegw-elgin-sa-east-1-002", "ec2-scopegw-elgin-sa-east-1-003", 
+                    "ec2-scpcnsl-elgin-prd-001", "ec2-tknsvc-elgin-prd-001", 
+                    "ec2-tknsvc-elgin-prd-002", "ec2-stpca-elgin-prd-001", 
+                    "ec2-stpca-elgin-prd-002-disasterrecovery"
+                ]
+            },
+            "Linear Sistemas": {
+                urlBase: "https://scope-portal-integrador6.conexao-tech.com",
+                ips: [
+                    "10.177.80.89", "10.177.82.114", "10.177.83.15", "10.177.81.61", 
+                    "10.177.80.40", "10.177.82.54", "10.177.84.33", "10.177.80.237", 
+                    "10.177.80.252", "10.177.33.34", "10.177.33.118", "10.177.33.171", 
+                    "10.177.80.24", "10.177.80.199", "10.177.82.228", "10.177.80.210", "10.177.82.230"
+                ],
+                instancias: [
+                    "ec2-scppsw-linear-prd-001", "ec2-scppsw-linear-prd-002", 
+                    "ec2-casi-linear-prd-001", "ec2-casi-linear-prd-002", 
+                    "ec2-scpsrv-linear-prd-001", "ec2-scpsrv-linear-prd-002", 
+                    "ec2-scpsrv-linear-prd-003", "ec2-scpprtl-linear-prd-001", 
+                    "ec2-scpprtl-linear-prd-002", "ec2-scopegw-linear-sa-east-1-001", 
+                    "ec2-scopegw-linear-sa-east-1-002", "ec2-scopegw-linear-sa-east-1-003", 
+                    "ec2-scpcnsl-linear-prd-001", "ec2-tknsvc-linear-prd-001", 
+                    "ec2-tknsvc-linear-prd-002", "ec2-stpca-linear-prd-001", 
+                    "ec2-stpca-linear-prd-002-disasterrecovery"
+                ]
+            }
+        };
+
+        function abrirDetalhes(nomeAmbiente) {
+            const ambiente = dadosAmbientes[nomeAmbiente];
+            if (!ambiente) return;
+
+            // Esconde grid e mostra detalhes
+            document.getElementById('home-view').style.display = 'none';
+            document.getElementById('details-view').style.display = 'block';
+            document.getElementById('backButton').style.display = 'inline-block';
+
+            // Atualiza cabeçalho
+            document.getElementById('main-title').innerText = `Ambiente - ${nomeAmbiente}`;
+            document.getElementById('main-subtitle').innerText = `Relação de Instâncias e Endereços IP`;
+
+            // Preenche barra de botões rápidos
+            const actionBar = document.getElementById('action-bar');
+            actionBar.innerHTML = `
+                <a href="${ambiente.urlBase}/portal/" target="_blank">Portal Principal</a>
+                <a href="${ambiente.urlBase}/adm" target="_blank">Painel Administrativo</a>
+                <a href="${ambiente.urlBase}/console/" target="_blank">Console de Operações</a>
+            `;
+
+            // Preenche a tabela ignorando a coluna Hostname
+            const tbody = document.getElementById('details-tbody');
+            tbody.innerHTML = '';
+
+            for (let i = 0; i < ambiente.instancias.length; i++) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${ambiente.instancias[i]}</strong></td>
+                    <td>${ambiente.ips[i]}</td>
+                `;
+                tbody.appendChild(tr);
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function voltarHome() {
+            document.getElementById('details-view').style.display = 'none';
+            document.getElementById('home-view').style.display = 'grid';
+            document.getElementById('backButton').style.display = 'none';
+
+            document.getElementById('main-title').innerText = "Painel de Acesso - Ambientes AWS";
+            document.getElementById('main-subtitle').innerText = "Central de links rápidos";
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
