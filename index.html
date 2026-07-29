@@ -123,11 +123,12 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Barra de Ações com Grid perfeito para alinhamento uniforme */
         .action-bar {
-            display: flex;
-            gap: 12px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
             margin-bottom: 30px;
-            flex-wrap: wrap;
         }
 
         .btn-action {
@@ -136,15 +137,16 @@
             justify-content: space-between;
             background: var(--card-bg);
             color: var(--primary-blue);
-            padding: 12px 18px;
+            padding: 14px 20px;
             text-decoration: none;
             border-radius: 10px;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
             border: 1px solid var(--border-color);
             border-bottom: 4px solid var(--accent-orange);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             transition: all 0.2s ease;
+            box-sizing: border-box;
         }
 
         .btn-action:hover {
@@ -158,8 +160,8 @@
         .btn-action span.tag {
             background: #E2E8F0;
             color: #475569;
-            padding: 3px 8px;
-            border-radius: 4px;
+            padding: 4px 10px;
+            border-radius: 6px;
             font-size: 11px;
             text-transform: uppercase;
             margin-left: 12px;
@@ -420,12 +422,19 @@
                     "10.177.80.24", "10.177.80.199", "10.177.82.228", "10.177.80.210", "10.177.82.230"
                 ],
                 instancias: [
-                    "ec2-scppsw-intel-linear-001" // ajuste mapeado abaixo via função genérica por palavras-chave
+                    "ec2-scppsw-linear-prd-001", "ec2-scppsw-linear-prd-002", 
+                    "ec2-casi-linear-prd-001", "ec2-casi-linear-prd-002", 
+                    "ec2-scpsrv-linear-prd-001", "ec2-scpsrv-linear-prd-002", 
+                    "ec2-scpsrv-linear-prd-003", "ec2-scpprtl-linear-prd-001", 
+                    "ec2-scpprtl-linear-prd-002", "ec2-scopegw-linear-sa-east-1-001", 
+                    "ec2-scopegw-linear-sa-east-1-002", "ec2-scopegw-linear-sa-east-1-003", 
+                    "ec2-scpcnsl-linear-prd-001", "ec2-tknsvc-linear-prd-001", 
+                    "ec2-tknsvc-linear-prd-002", "ec2-stpca-linear-prd-001", 
+                    "ec2-stpca-linear-prd-002-disasterrecovery"
                 ]
             }
         };
 
-        // Função inteligente para categorizar cada instância com base no seu nome
         function obterCategoria(instancia) {
             const lower = instancia.toLowerCase();
             if (lower.includes('psw')) return '📦 Módulo PSW (Processamento)';
@@ -450,7 +459,6 @@
             document.getElementById('main-title').innerText = `Ambiente - ${nomeAmbiente}`;
             document.getElementById('main-subtitle').innerText = `Relação de Instâncias e Endereços IP Separados por Tema`;
 
-            // Barra de botões do topo com o mesmo visual dos cards
             const actionBar = document.getElementById('action-bar');
             actionBar.innerHTML = `
                 <a href="${ambiente.urlBase}/portal/" target="_blank" class="btn-action">Portal Principal <span class="tag">Portal</span></a>
@@ -458,7 +466,6 @@
                 <a href="${ambiente.urlBase}/console/" target="_blank" class="btn-action">Console de Operações <span class="tag">Console</span></a>
             `;
 
-            // Organiza os itens por grupos temáticos
             const gruposMap = {};
             for (let i = 0; i < ambiente.instancias.length; i++) {
                 const inst = ambiente.instancias[i];
@@ -472,7 +479,6 @@
             const container = document.getElementById('groups-container');
             container.innerHTML = '';
 
-            // Ordem personalizada de exibição dos temas para ficar bem intuitivo
             const ordemTemas = [
                 '📦 Módulo PSW (Processamento)',
                 '🔗 Módulo CASI',
