@@ -450,7 +450,7 @@
             if (lower.includes('casi')) return '🔗 Módulo CASI';
             if (lower.includes('srv')) return '🖥️ Servidores de Aplicação (Scope Srv)';
             if (lower.includes('prtl') || lower.includes('portal')) return '🌐 Portal';
-            if (lower.includes('gw')) return '🛡️ Gateway / VPN';
+            if (lower.includes('gw')) return '🛡️ Gateway';
             if (lower.includes('cnsl') || lower.includes('console')) return '⚙️ Console de Operações';
             if (lower.includes('tkn') || lower.includes('token')) return '🔑 Token Service';
             if (lower.includes('stpca') || lower.includes('pca')) return '🔒 Stepca';
@@ -466,7 +466,7 @@
             document.getElementById('backButton').style.display = 'inline-block';
 
             document.getElementById('main-title').innerText = `Ambiente - ${nomeAmbiente}`;
-            document.getElementById('main-subtitle').innerText = `Relação de Instâncias e Endereços IP Separados por Tema`;
+            document.getElementById('main-subtitle').innerText = `Relação de Instâncias e Endereços IP Separados por Módulos`;
 
             const actionBar = document.getElementById('action-bar');
             actionBar.innerHTML = `
