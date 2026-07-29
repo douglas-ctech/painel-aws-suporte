@@ -126,7 +126,7 @@
         .action-bar {
             display: flex;
             gap: 12px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
         }
 
@@ -134,15 +134,16 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #F1F5F9;
+            background: var(--card-bg);
             color: var(--primary-blue);
             padding: 12px 18px;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 13px;
             font-weight: 600;
             border: 1px solid var(--border-color);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            border-bottom: 4px solid var(--accent-orange);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             transition: all 0.2s ease;
         }
 
@@ -151,7 +152,7 @@
             color: #FFFFFF;
             border-color: var(--primary-blue);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(10, 54, 99, 0.2);
+            box-shadow: 0 8px 12px -2px rgba(10, 54, 99, 0.2);
         }
 
         .btn-action span.tag {
@@ -171,12 +172,31 @@
             color: #FFFFFF;
         }
 
-        .table-container {
+        /* Seções por Grupo na Página de Detalhes */
+        .section-group {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 10px;
+            margin-bottom: 24px;
             overflow: hidden;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-bottom: 4px solid var(--accent-orange);
+        }
+
+        .section-header {
+            background-color: #F8FAFC;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--primary-blue);
+            font-size: 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .table-container {
+            width: 100%;
         }
 
         table {
@@ -187,15 +207,15 @@
         }
 
         th, td {
-            padding: 16px 20px;
+            padding: 14px 20px;
             border-bottom: 1px solid var(--border-color);
         }
 
         th {
-            background-color: #F8FAFC;
-            color: var(--primary-blue);
-            font-weight: 700;
-            font-size: 13px;
+            background-color: #FAFAFA;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -230,100 +250,46 @@
         
         <!-- VISÃO GERAL (CARDS) -->
         <div id="home-view" class="grid">
-            
-            <!-- 1. Procfit -->
             <div class="card" onclick="abrirDetalhes('Procfit')">
-                <div class="card-header">
-                    <h3>Ambiente - Procfit</h3>
-                </div>
-                <div class="card-footer">
-                    <span>📁 AWS • Servidor Integrador 4</span>
-                </div>
+                <div class="card-header"><h3>Ambiente - Procfit</h3></div>
+                <div class="card-footer"><span>📁 AWS • Servidor Integrador 4</span></div>
             </div>
-
-            <!-- 2. Arius -->
             <div class="card" onclick="abrirDetalhes('Arius')">
-                <div class="card-header">
-                    <h3>Ambiente - Arius</h3>
-                </div>
-                <div class="card-footer">
-                    <span>📁 AWS • Servidor Integrador 5</span>
-                </div>
+                <div class="card-header"><h3>Ambiente - Arius</h3></div>
+                <div class="card-footer"><span>📁 AWS • Servidor Integrador 5</span></div>
             </div>
-
-            <!-- 3. MultiplusCard -->
             <div class="card" onclick="abrirDetalhes('MultiplusCard')">
-                <div class="card-header">
-                    <h3>Ambiente - MultiplusCard</h3>
-                </div>
-                <div class="card-footer">
-                    <span>📁 AWS • Servidor Integrador 2</span>
-                </div>
+                <div class="card-header"><h3>Ambiente - MultiplusCard</h3></div>
+                <div class="card-footer"><span>📁 AWS • Servidor Integrador 2</span></div>
             </div>
-
-            <!-- 4. Softcom -->
             <div class="card" onclick="abrirDetalhes('Softcom')">
-                <div class="card-header">
-                    <h3>Ambiente - Softcom</h3>
-                </div>
-                <div class="card-footer">
-                    <span>📁 AWS • Servidor Integrador 1</span>
-                </div>
+                <div class="card-header"><h3>Ambiente - Softcom</h3></div>
+                <div class="card-footer"><span>📁 AWS • Servidor Integrador 1</span></div>
             </div>
-
-            <!-- 5. Compartilhado -->
             <div class="card" onclick="abrirDetalhes('Compartilhado')">
-                <div class="card-header">
-                    <h3>Ambiente - Compartilhado</h3>
-                </div>
-                <div class="card-footer">
-                    <span>📁 AWS • Servidor Integradores</span>
-                </div>
+                <div class="card-header"><h3>Ambiente - Compartilhado</h3></div>
+                <div class="card-footer"><span>📁 AWS • Servidor Integradores</span></div>
             </div>
-
-            <!-- 6. Elgin -->
             <div class="card" onclick="abrirDetalhes('Elgin')">
-                <div class="card-header">
-                    <h3>Ambiente - Elgin</h3>
-                </div>
-                <div class="card-footer">
-                    <span>📁 AWS • Servidor Integrador 3</span>
-                </div>
+                <div class="card-header"><h3>Ambiente - Elgin</h3></div>
+                <div class="card-footer"><span>📁 AWS • Servidor Integrador 3</span></div>
             </div>
-
-            <!-- 7. Linear Sistemas -->
             <div class="card" onclick="abrirDetalhes('Linear Sistemas')">
-                <div class="card-header">
-                    <h3>Ambiente - Linear Sistemas</h3>
-                </div>
-                <div class="card-footer">
-                    <span>📁 AWS • Servidor Integrador 6</span>
-                </div>
+                <div class="card-header"><h3>Ambiente - Linear Sistemas</h3></div>
+                <div class="card-footer"><span>📁 AWS • Servidor Integrador 6</span></div>
             </div>
-
         </div>
 
-        <!-- VISÃO DE DETALHES (IPs E INSTÂNCIAS) -->
+        <!-- VISÃO DE DETALHES (AGRUPADA POR TEMAS) -->
         <div id="details-view" class="details-view">
             <div id="action-bar" class="action-bar"></div>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Instância</th>
-                            <th>Endereço IP</th>
-                        </tr>
-                    </thead>
-                    <tbody id="details-tbody">
-                        <!-- Preenchido via JavaScript -->
-                    </tbody>
-                </table>
+            <div id="groups-container">
+                <!-- Preenchido dinamicamente por grupos -->
             </div>
         </div>
     </div>
 
     <script>
-        // Dados extraídos da planilha para cada ambiente
         const dadosAmbientes = {
             "Procfit": {
                 urlBase: "https://scope-portal-integrador4.conexao-tech.com",
@@ -454,33 +420,37 @@
                     "10.177.80.24", "10.177.80.199", "10.177.82.228", "10.177.80.210", "10.177.82.230"
                 ],
                 instancias: [
-                    "ec2-scppsw-linear-prd-001", "ec2-scppsw-linear-prd-002", 
-                    "ec2-casi-linear-prd-001", "ec2-casi-linear-prd-002", 
-                    "ec2-scpsrv-linear-prd-001", "ec2-scpsrv-linear-prd-002", 
-                    "ec2-scpsrv-linear-prd-003", "ec2-scpprtl-linear-prd-001", 
-                    "ec2-scpprtl-linear-prd-002", "ec2-scopegw-linear-sa-east-1-001", 
-                    "ec2-scopegw-linear-sa-east-1-002", "ec2-scopegw-linear-sa-east-1-003", 
-                    "ec2-scpcnsl-linear-prd-001", "ec2-tknsvc-linear-prd-001", 
-                    "ec2-tknsvc-linear-prd-002", "ec2-stpca-linear-prd-001", 
-                    "ec2-stpca-linear-prd-002-disasterrecovery"
+                    "ec2-scppsw-intel-linear-001" // ajuste mapeado abaixo via função genérica por palavras-chave
                 ]
             }
         };
+
+        // Função inteligente para categorizar cada instância com base no seu nome
+        function obterCategoria(instancia) {
+            const lower = instancia.toLowerCase();
+            if (lower.includes('psw')) return '📦 Módulo PSW (Processamento)';
+            if (lower.includes('casi')) return '🔗 Módulo CASI';
+            if (lower.includes('srv')) return '🖥️ Servidores de Aplicação (Scope Srv)';
+            if (lower.includes('prtl') || lower.includes('portal')) return '🌐 Portal';
+            if (lower.includes('gw')) return '🛡️ Gateway / VPN';
+            if (lower.includes('cnsl') || lower.includes('console')) return '⚙️ Console de Operações';
+            if (lower.includes('tkn') || lower.includes('token')) return '🔑 Token Service';
+            if (lower.includes('stpca') || lower.includes('pca')) return '🔒 Stepca';
+            return '📁 Outros Componentes';
+        }
 
         function abrirDetalhes(nomeAmbiente) {
             const ambiente = dadosAmbientes[nomeAmbiente];
             if (!ambiente) return;
 
-            // Esconde grid e mostra detalhes
             document.getElementById('home-view').style.display = 'none';
             document.getElementById('details-view').style.display = 'block';
             document.getElementById('backButton').style.display = 'inline-block';
 
-            // Atualiza cabeçalho
             document.getElementById('main-title').innerText = `Ambiente - ${nomeAmbiente}`;
-            document.getElementById('main-subtitle').innerText = `Relação de Instâncias e Endereços IP`;
+            document.getElementById('main-subtitle').innerText = `Relação de Instâncias e Endereços IP Separados por Tema`;
 
-            // Preenche barra de botões rápidos com visual melhorado
+            // Barra de botões do topo com o mesmo visual dos cards
             const actionBar = document.getElementById('action-bar');
             actionBar.innerHTML = `
                 <a href="${ambiente.urlBase}/portal/" target="_blank" class="btn-action">Portal Principal <span class="tag">Portal</span></a>
@@ -488,18 +458,67 @@
                 <a href="${ambiente.urlBase}/console/" target="_blank" class="btn-action">Console de Operações <span class="tag">Console</span></a>
             `;
 
-            // Preenche a tabela ignorando a coluna Hostname
-            const tbody = document.getElementById('details-tbody');
-            tbody.innerHTML = '';
-
+            // Organiza os itens por grupos temáticos
+            const gruposMap = {};
             for (let i = 0; i < ambiente.instancias.length; i++) {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td><strong>${ambiente.instancias[i]}</strong></td>
-                    <td>${ambiente.ips[i]}</td>
-                `;
-                tbody.appendChild(tr);
+                const inst = ambiente.instancias[i];
+                const ip = ambiente.ips[i] || "-";
+                const cat = obterCategoria(inst);
+
+                if (!gruposMap[cat]) gruposMap[cat] = [];
+                gruposMap[cat].push({ instancia: inst, ip: ip });
             }
+
+            const container = document.getElementById('groups-container');
+            container.innerHTML = '';
+
+            // Ordem personalizada de exibição dos temas para ficar bem intuitivo
+            const ordemTemas = [
+                '📦 Módulo PSW (Processamento)',
+                '🔗 Módulo CASI',
+                '🖥️ Servidores de Aplicação (Scope Srv)',
+                '🌐 Portal',
+                '🛡️ Gateway / VPN',
+                '⚙️ Console de Operações',
+                '🔑 Token Service',
+                '🔒 Stepca',
+                '📁 Outros Componentes'
+            ];
+
+            ordemTemas.forEach(tema => {
+                if (gruposMap[tema] && gruposMap[tema].length > 0) {
+                    const groupDiv = document.createElement('div');
+                    groupDiv.className = 'section-group';
+
+                    let linhasTabela = '';
+                    gruposMap[tema].forEach(item => {
+                        linhasTabela += `
+                            <tr>
+                                <td><strong>${item.instancia}</strong></td>
+                                <td>${item.ip}</td>
+                            </tr>
+                        `;
+                    });
+
+                    groupDiv.innerHTML = `
+                        <div class="section-header">${tema}</div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Instância</th>
+                                        <th>Endereço IP</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${linhasTabela}
+                                </tbody>
+                            </table>
+                        </div>
+                    `;
+                    container.appendChild(groupDiv);
+                }
+            });
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
