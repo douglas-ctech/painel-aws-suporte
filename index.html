@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Acesso - Ambientes AWS</title>
+    <title>Painel de Acesso - Ambientes Cloud</title>
     <style>
         :root {
             --primary-blue: #0A3663;
@@ -14,540 +14,169 @@
             --text-muted: #666666;
             --border-color: #E2E8F0;
         }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            margin: 0;
-            padding: 30px 20px;
-            color: var(--text-main);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        header {
-            margin-bottom: 30px;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header-titles h1 {
-            color: var(--primary-blue);
-            font-size: 26px;
-            margin: 0 0 5px 0;
-        }
-
-        .subtitle {
-            color: var(--text-muted);
-            font-size: 14px;
-            margin: 0;
-        }
-
-        .back-btn {
-            background: var(--primary-blue);
-            color: #FFFFFF;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 13px;
-            display: none;
-            transition: background 0.2s, transform 0.1s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .back-btn:hover {
-            background: #08294d;
-            transform: translateY(-1px);
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 24px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            border-bottom: 4px solid var(--accent-orange);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            cursor: pointer;
-            min-height: 120px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
-        }
-
-        .card-header h3 {
-            margin: 0 0 10px 0;
-            color: var(--primary-blue);
-            font-size: 20px;
-            font-weight: 700;
-        }
-
-        .card-footer {
-            font-size: 13px;
-            color: var(--text-muted);
-            border-top: 1px solid #EDF2F7;
-            padding-top: 15px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 500;
-        }
-
-        /* Estilo da tela de detalhes */
-        .details-view {
-            display: none;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .action-bar {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .btn-action {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: var(--card-bg);
-            color: var(--primary-blue);
-            padding: 14px 20px;
-            text-decoration: none;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            border: 1px solid var(--border-color);
-            border-bottom: 4px solid var(--accent-orange);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            transition: all 0.2s ease;
-            box-sizing: border-box;
-        }
-
-        .btn-action:hover {
-            background: var(--primary-blue);
-            color: #FFFFFF;
-            border-color: var(--primary-blue);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 12px -2px rgba(10, 54, 99, 0.2);
-        }
-
-        .btn-action span.tag {
-            background: #E2E8F0;
-            color: #475569;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 11px;
-            text-transform: uppercase;
-            margin-left: 12px;
-            font-weight: 700;
-            transition: background 0.2s, color 0.2s;
-        }
-
-        .btn-action:hover span.tag {
-            background: rgba(255, 255, 255, 0.2);
-            color: #FFFFFF;
-        }
-
-        .section-group {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            margin-bottom: 24px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            border-bottom: 4px solid var(--accent-orange);
-        }
-
-        .section-header {
-            background-color: #F8FAFC;
-            padding: 14px 20px;
-            border-bottom: 1px solid var(--border-color);
-            color: var(--primary-blue);
-            font-size: 15px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .table-container {
-            width: 100%;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            font-size: 14px;
-            table-layout: fixed; /* Garante que as larguras das colunas sejam respeitadas rigidamente */
-        }
-
-        th, td {
-            padding: 14px 20px;
-            border-bottom: 1px solid var(--border-color);
-            word-break: break-all;
-        }
-
-        /* Larguras fixas para garantir alinhamento perfeito de coluna entre todas as tabelas */
-        th:nth-child(1), td:nth-child(1) {
-            width: 70%;
-        }
-
-        th:nth-child(2), td:nth-child(2) {
-            width: 30%;
-        }
-
-        th {
-            background-color: #FAFAFA;
-            color: var(--text-muted);
-            font-weight: 600;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        tr {
-            transition: background-color 0.15s ease;
-        }
-
-        tr:hover {
-            background-color: #F8FAFC;
-        }
-
-        td strong {
-            color: var(--primary-blue);
-        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: var(--bg-color); margin: 0; padding: 30px 20px; color: var(--text-main); }
+        .container { max-width: 1200px; margin: 0 auto; }
+        header { margin-bottom: 30px; border-bottom: 2px solid var(--border-color); padding-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .header-titles h1 { color: var(--primary-blue); font-size: 26px; margin: 0 0 5px 0; }
+        .subtitle { color: var(--text-muted); font-size: 14px; margin: 0; }
+        .back-btn { background: var(--primary-blue); color: #FFFFFF; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 13px; display: none; transition: background 0.2s, transform 0.1s; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .back-btn:hover { background: #08294d; transform: translateY(-1px); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,.05), 0 2px 4px -1px rgba(0,0,0,.03); border-bottom: 4px solid var(--accent-orange); display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; min-height: 120px; transition: transform .2s ease, box-shadow .2s ease; }
+        .card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,.08); }
+        .card-header h3 { margin: 0 0 10px 0; color: var(--primary-blue); font-size: 20px; font-weight: 700; }
+        .card-footer { font-size: 13px; color: var(--text-muted); border-top: 1px solid #EDF2F7; padding-top: 15px; display: flex; align-items: center; gap: 6px; font-weight: 500; }
+        .details-view { display: none; animation: fadeIn .3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .action-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .btn-action { display: flex; align-items: center; justify-content: space-between; background: var(--card-bg); color: var(--primary-blue); padding: 14px 20px; text-decoration: none; border-radius: 10px; font-size: 14px; font-weight: 600; border: 1px solid var(--border-color); border-bottom: 4px solid var(--accent-orange); box-shadow: 0 4px 6px -1px rgba(0,0,0,.05); transition: all .2s ease; box-sizing: border-box; }
+        .btn-action:hover { background: var(--primary-blue); color: #FFFFFF; border-color: var(--primary-blue); transform: translateY(-2px); box-shadow: 0 8px 12px -2px rgba(10,54,99,.2); }
+        .btn-action span.tag { background: #E2E8F0; color: #475569; padding: 4px 10px; border-radius: 6px; font-size: 11px; text-transform: uppercase; margin-left: 12px; font-weight: 700; transition: background .2s, color .2s; }
+        .btn-action:hover span.tag { background: rgba(255,255,255,.2); color: #FFFFFF; }
+        .section-group { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,.05); border-bottom: 4px solid var(--accent-orange); }
+        .section-header { background-color: #F8FAFC; padding: 14px 20px; border-bottom: 1px solid var(--border-color); color: var(--primary-blue); font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .table-container { width: 100%; }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; table-layout: fixed; }
+        th, td { padding: 14px 20px; border-bottom: 1px solid var(--border-color); word-break: break-all; }
+        th:nth-child(1), td:nth-child(1) { width: 70%; }
+        th:nth-child(2), td:nth-child(2) { width: 30%; }
+        th { background-color: #FAFAFA; color: var(--text-muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .5px; }
+        tr:last-child td { border-bottom: none; }
+        tr { transition: background-color .15s ease; }
+        tr:hover { background-color: #F8FAFC; }
+        td strong { color: var(--primary-blue); }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <header>
-            <div class="header-titles">
-                <h1 id="main-title">Painel de Acesso - Ambientes AWS</h1>
-                <p id="main-subtitle" class="subtitle">Central de links rápidos</p>
-            </div>
-            <button id="backButton" class="back-btn" onclick="voltarHome()">← Voltar ao Início</button>
-        </header>
-        
-        <!-- VISÃO GERAL (CARDS) -->
-        <div id="home-view" class="grid">
-            <div class="card" onclick="abrirDetalhes('Procfit')">
-                <div class="card-header"><h3>Ambiente - Procfit</h3></div>
-                <div class="card-footer"><span>📁 AWS • Servidor Integrador 4</span></div>
-            </div>
-            <div class="card" onclick="abrirDetalhes('Arius')">
-                <div class="card-header"><h3>Ambiente - Arius</h3></div>
-                <div class="card-footer"><span>📁 AWS • Servidor Integrador 5</span></div>
-            </div>
-            <div class="card" onclick="abrirDetalhes('MultiplusCard')">
-                <div class="card-header"><h3>Ambiente - MultiplusCard</h3></div>
-                <div class="card-footer"><span>📁 AWS • Servidor Integrador 2</span></div>
-            </div>
-            <div class="card" onclick="abrirDetalhes('Softcom')">
-                <div class="card-header"><h3>Ambiente - Softcom</h3></div>
-                <div class="card-footer"><span>📁 AWS • Servidor Integrador 1</span></div>
-            </div>
-            <div class="card" onclick="abrirDetalhes('Compartilhado')">
-                <div class="card-header"><h3>Ambiente - Compartilhado</h3></div>
-                <div class="card-footer"><span>📁 AWS • Servidor Integradores</span></div>
-            </div>
-            <div class="card" onclick="abrirDetalhes('Elgin')">
-                <div class="card-header"><h3>Ambiente - Elgin</h3></div>
-                <div class="card-footer"><span>📁 AWS • Servidor Integrador 3</span></div>
-            </div>
-            <div class="card" onclick="abrirDetalhes('Linear Sistemas')">
-                <div class="card-header"><h3>Ambiente - Linear Sistemas</h3></div>
-                <div class="card-footer"><span>📁 AWS • Servidor Integrador 6</span></div>
-            </div>
+<div class="container">
+    <header>
+        <div class="header-titles">
+            <h1 id="main-title">Painel de Acesso - Ambientes Cloud</h1>
+            <p id="main-subtitle" class="subtitle">Central de links rápidos</p>
         </div>
+        <button id="backButton" class="back-btn" onclick="voltarHome()">← Voltar ao Início</button>
+    </header>
 
-        <!-- VISÃO DE DETALHES (AGRUPADA POR TEMAS) -->
-        <div id="details-view" class="details-view">
-            <div id="action-bar" class="action-bar"></div>
-            <div id="groups-container">
-                <!-- Preenchido dinamicamente por grupos -->
-            </div>
-        </div>
+    <div id="home-view" class="grid">
+        <div class="card" onclick="abrirDetalhes('Procfit')"><div class="card-header"><h3>Ambiente - Procfit</h3></div><div class="card-footer"><span>📁 AWS • Servidor Integrador 4</span></div></div>
+        <div class="card" onclick="abrirDetalhes('Arius')"><div class="card-header"><h3>Ambiente - Arius</h3></div><div class="card-footer"><span>📁 AWS • Servidor Integrador 5</span></div></div>
+        <div class="card" onclick="abrirDetalhes('MultiplusCard')"><div class="card-header"><h3>Ambiente - MultiplusCard</h3></div><div class="card-footer"><span>📁 AWS • Servidor Integrador 2</span></div></div>
+        <div class="card" onclick="abrirDetalhes('Softcom')"><div class="card-header"><h3>Ambiente - Softcom</h3></div><div class="card-footer"><span>📁 AWS • Servidor Integrador 1</span></div></div>
+        <div class="card" onclick="abrirDetalhes('Compartilhado')"><div class="card-header"><h3>Ambiente - Compartilhado</h3></div><div class="card-footer"><span>📁 AWS • Servidor Integradores</span></div></div>
+        <div class="card" onclick="abrirDetalhes('Elgin')"><div class="card-header"><h3>Ambiente - Elgin</h3></div><div class="card-footer"><span>📁 AWS • Servidor Integrador 3</span></div></div>
+        <div class="card" onclick="abrirDetalhes('Linear Sistemas')"><div class="card-header"><h3>Ambiente - Linear Sistemas</h3></div><div class="card-footer"><span>📁 AWS • Servidor Integrador 6</span></div></div>
+        <div class="card" onclick="abrirAzure()"><div class="card-header"><h3>Servidores Azure</h3></div><div class="card-footer"><span>☁️ Azure • Servidores de Produção</span></div></div>
     </div>
 
-    <script>
-        const dadosAmbientes = {
-            "Procfit": {
-                urlBase: "https://scope-portal-integrador4.conexao-tech.com",
-                ips: [
-                    "10.177.80.115", "10.177.82.76", "10.177.83.29", "10.177.81.28", 
-                    "10.177.80.7", "10.177.82.18", "10.177.84.60", "10.177.80.239", 
-                    "10.177.80.207", "10.177.33.45", "10.177.33.85", "10.177.33.159", 
-                    "10.177.80.51", "10.177.80.235", "10.177.82.250", "10.177.80.224", "10.177.82.248"
-                ],
-                instancias: [
-                    "ec2-scppsw-procfit-prd-001", "ec2-scppsw-procfit-prd-002", 
-                    "ec2-casi-procfit-prd-001", "ec2-casi-procfit-prd-002", 
-                    "ec2-scpsrv-procfit-prd-001", "ec2-scpsrv-procfit-prd-002", 
-                    "ec2-scpsrv-procfit-prd-003", "ec2-scpprtl-procfit-prd-001", 
-                    "ec2-scpprtl-procfit-prd-002", "ec2-scopegw-procfit-new-sa-east-1-001", 
-                    "ec2-scopegw-procfit-new-sa-east-1-002", "ec2-scopegw-procfit-new-sa-east-1-003", 
-                    "ec2-scpcnsl-procfit-prd-001", "ec2-tknsvc-procfit-prd-001", 
-                    "ec2-tknsvc-procfit-prd-002", "ec2-stpca-procfit-prd-001", 
-                    "ec2-stpca-procfit-prd-002-disasterrecovery"
-                ]
-            },
-            "Arius": {
-                urlBase: "https://scope-portal-integrador5.conexao-tech.com",
-                ips: [
-                    "10.177.80.73", "10.177.82.78", "10.177.83.30", "10.177.81.40", 
-                    "10.177.80.61", "10.177.82.35", "10.177.84.10", "10.177.80.227", 
-                    "10.177.80.248", "10.177.33.59", "10.177.33.117", "10.177.33.150", 
-                    "10.177.80.43", "10.177.80.196", "10.177.82.229", "10.177.80.197", "10.177.82.216"
-                ],
-                instancias: [
-                    "ec2-scppsw-arius-prd-001", "ec2-scppsw-arius-prd-002", 
-                    "ec2-casi-arius-prd-001", "ec2-casi-arius-prd-002", 
-                    "ec2-scpsrv-arius-prd-001", "ec2-scpsrv-arius-prd-002", 
-                    "ec2-scpsrv-arius-prd-003", "ec2-scpprtl-arius-prd-001", 
-                    "ec2-scpprtl-arius-prd-002", "ec2-scopegw-arius-sa-east-1-001", 
-                    "ec2-scopegw-arius-sa-east-1-002", "ec2-scopegw-arius-sa-east-1-003", 
-                    "ec2-scpcnsl-arius-prd-001", "ec2-tknsvc-arius-prd-001", 
-                    "ec2-tknsvc-arius-prd-002", "ec2-stpca-arius-prd-001", 
-                    "ec2-stpca-arius-prd-002-disasterrecovery"
-                ]
-            },
-            "MultiplusCard": {
-                urlBase: "https://scope-portal-integrador2.conexao-tech.com",
-                ips: [
-                    "10.177.112.82", "10.177.114.91", "10.177.113.47", "10.177.115.10", 
-                    "10.177.112.33", "10.177.114.16", "10.177.116.57", "10.177.112.209", 
-                    "10.177.114.244", "10.177.33.23", "10.177.33.75", "10.177.33.187", 
-                    "10.177.112.22", "10.177.112.198", "10.177.114.242", "10.177.112.231", "-"
-                ],
-                instancias: [
-                    "ec2-scopepsw-prod-mtpls-sa-east-1-001", "ec2-scopepsw-prod-mtpls-sa-east-1-002", 
-                    "ec2-casi-prod-mtpls-sa-east-1-001", "ec2-casi-prod-mtpls-sa-east-1-002", 
-                    "ec2-scopesrv-prod-mtpls-sa-east-1-001", "ec2-scopesrv-prod-mtpls-sa-east-1-002", 
-                    "ec2-scopesrv-prod-mtpls-sa-east-1-003", "ec2-scopeportal-prod-mtpls-sa-east-1-001", 
-                    "ec2-scopeportal-prod-mtpls-sa-east-1-002", "ec2-scopegw-multiplus-sa-east-1-001", 
-                    "ec2-scopegw-multiplus-sa-east-1-002", "ec2-scopegw-multiplus-sa-east-1-003", 
-                    "ec2-scopeconsole-prod-mtpls-sa-east-1-001", "ec2-tokenservice-prod-mtpls-sa-east-1-001", 
-                    "ec2-tokenservice-prod-mtpls-sa-east-1-002", "ec2-stepca-prod-mtpls-sa-east-1-001", "-"
-                ]
-            },
-            "Softcom": {
-                urlBase: "https://scope-portal-integrador1.conexao-tech.com",
-                ips: [
-                    "10.177.80.113", "10.177.82.100", "10.177.81.30", "10.177.83.52", 
-                    "10.177.80.20", "10.177.82.47", "10.177.84.5", "10.177.80.201", 
-                    "10.177.80.240", "10.177.33.61", "10.177.33.110", "10.177.33.39", 
-                    "10.177.80.30", "10.177.80.211", "10.177.82.239", "10.177.80.209", "10.177.82.232"
-                ],
-                instancias: [
-                    "ec2-scopepsw-prod-softcom-sa-east-1-001", "ec2-scopepsw-prod-softcom-sa-east-1-002", 
-                    "ec2-casi-prod-softcom-sa-east-1-001", "ec2-casi-prod-softcom-sa-east-1-002", 
-                    "ec2-scopesrv-prod-softcom-sa-east-1-001", "ec2-scopesrv-prod-softcom-sa-east-1-002", 
-                    "ec2-scopesrv-prod-softcom-sa-east-1-003", "ec2-scopeportal-prod-softcom-sa-east-1-001", 
-                    "ec2-scopeportal-prod-softcom-sa-east-1-002", "ec2-scopegw-softcom-sa-east-1-001", 
-                    "ec2-scopegw-softcom-sa-east-1-002", "ec2-scopegw-softcom-sa-east-1-003", 
-                    "ec2-scopeconsole-prod-intg-sa-east-1-001", "ec2-tokenservice-prod-softcom-sa-east-1-001", 
-                    "ec2-tokenservice-prod-softcom-sa-east-1-002", "ec2-stepca-prod-softcom-sa-east-1-001", 
-                    "ec2-stepca-prod-softcom-sa-east-1-002-DisasterRecovery"
-                ]
-            },
-            "Compartilhado": {
-                urlBase: "https://scope-portal-integradores.conexao-tech.com",
-                ips: [
-                    "10.177.80.94", "10.177.82.96", "10.177.81.8", "10.177.83.60", 
-                    "10.177.80.9", "10.177.82.30", "10.177.84.38", "10.177.80.230", 
-                    "10.177.80.225", "10.177.33.55", "10.177.33.125", "10.177.33.185", 
-                    "10.177.33.35", "10.177.80.25", "10.177.80.208", "10.177.82.201", 
-                    "10.177.80.250", "10.177.82.215"
-                ],
-                instancias: [
-                    "ec2-scopepsw-prod-cmptd-sa-east-1-001", "ec2-scopepsw-prod-cmptd-sa-east-1-002", 
-                    "ec2-casi-prod-intg-sa-east-1-001", "ec2-casi-prod-intg-sa-east-1-002", 
-                    "ec2-scopesrv-prod-cmptd-sa-east-1-001", "ec2-scopesrv-prod-cmptd-sa-east-1-002", 
-                    "ec2-scopesrv-prod-cmptd-sa-east-1-003", "ec2-scopeportal-prod-cmptd-sa-east-1-001", 
-                    "ec2-scopeportal-prod-cmptd-sa-east-1-002", "ec2-scopegw-cmptl-sa-east-1-001", 
-                    "ec2-scopegw-cmptl-sa-east-1-002", "ec2-scopegw-cmptl-sa-east-1-003", 
-                    "ec2-scopegw-cmptl-sa-east-1-004", "ec2-scopeconsole-prod-cmptd-sa-east-1-001", 
-                    "ec2-tokenservice-prod-cmptd-sa-east-1-001", "ec2-tokenservice-prod-cmptd-sa-east-1-002", 
-                    "ec2-stepca-prod-cmptd-sa-east-1-001", "ec2-stepca-prod-cmptd-sa-east-1-002-disasterrecovery"
-                ]
-            },
-            "Elgin": {
-                urlBase: "https://scope-portal-integrador3.conexao-tech.com",
-                ips: [
-                    "10.177.225.202", "10.177.226.51", "10.177.224.22", "10.177.224.126", 
-                    "10.177.224.138", "10177224225", "10.177.225.46", "10.177.225.115", 
-                    "10.177.225.181", "10.177.33.38", "10.177.33.92", "10.177.33.151", 
-                    "10.177.224.158", "10.177.225.107", "10.177.225.172", "10.177.225.119", "10.177.225.182"
-                ],
-                instancias: [
-                    "ec2-scppsw-elgin-prd-001", "ec2-scppsw-elgin-prd-002", 
-                    "ec2-casi-elgin-prd-001", "ec2-casi-elgin-prd-002", 
-                    "ec2-scpsrv-elgin-prd-001", "ec2-scpsrv-elgin-prd-002", 
-                    "ec2-scpsrv-elgin-prd-003", "ec2-scpprtl-elgin-prd-001", 
-                    "ec2-scpprtl-elgin-prd-002", "ec2-scopegw-elgin-sa-east-1-001", 
-                    "ec2-scopegw-elgin-sa-east-1-002", "ec2-scopegw-elgin-sa-east-1-003", 
-                    "ec2-scpcnsl-elgin-prd-001", "ec2-tknsvc-elgin-prd-001", 
-                    "ec2-tknsvc-elgin-prd-002", "ec2-stpca-elgin-prd-001", 
-                    "ec2-stpca-elgin-prd-002-disasterrecovery"
-                ]
-            },
-            "Linear Sistemas": {
-                urlBase: "https://scope-portal-integrador6.conexao-tech.com",
-                ips: [
-                    "10.177.80.89", "10.177.82.114", "10.177.83.15", "10.177.81.61", 
-                    "10.177.80.40", "10.177.82.54", "10.177.84.33", "10.177.80.237", 
-                    "10.177.80.252", "10.177.33.34", "10.177.33.118", "10.177.33.171", 
-                    "10.177.80.24", "10.177.80.199", "10.177.82.228", "10.177.80.210", "10.177.82.230"
-                ],
-                instancias: [
-                    "ec2-scppsw-linear-prd-001", "ec2-scppsw-linear-prd-002", 
-                    "ec2-casi-linear-prd-001", "ec2-casi-linear-prd-002", 
-                    "ec2-scpsrv-linear-prd-001", "ec2-scpsrv-linear-prd-002", 
-                    "ec2-scpsrv-linear-prd-003", "ec2-scpprtl-linear-prd-001", 
-                    "ec2-scpprtl-linear-prd-002", "ec2-scopegw-linear-sa-east-1-001", 
-                    "ec2-scopegw-linear-sa-east-1-002", "ec2-scopegw-linear-sa-east-1-003", 
-                    "ec2-scpcnsl-linear-prd-001", "ec2-tknsvc-linear-prd-001", 
-                    "ec2-tknsvc-linear-prd-002", "ec2-stpca-linear-prd-001", 
-                    "ec2-stpca-linear-prd-002-disasterrecovery"
-                ]
-            }
-        };
+    <div id="details-view" class="details-view">
+        <div id="action-bar" class="action-bar"></div>
+        <div id="groups-container"></div>
+    </div>
+</div>
 
-        function obterCategoria(instancia) {
-            const lower = instancia.toLowerCase();
-            if (lower.includes('psw')) return '📦 Módulo PSW (Processamento)';
-            if (lower.includes('casi')) return '🔗 Módulo CASI';
-            if (lower.includes('srv')) return '🖥️ Servidores de Aplicação (Scope Srv)';
-            if (lower.includes('prtl') || lower.includes('portal')) return '🌐 Portal';
-            if (lower.includes('gw')) return '🛡️ Gateway';
-            if (lower.includes('cnsl') || lower.includes('console')) return '⚙️ Console de Operações';
-            if (lower.includes('tkn') || lower.includes('token')) return '🔑 Token Service';
-            if (lower.includes('stpca') || lower.includes('pca')) return '🔒 Stepca';
-            
+<script>
+const dadosAmbientes = {
+"Procfit": { urlBase: "https://scope-portal-integrador4.conexao-tech.com", ips: ["10.177.80.115","10.177.82.76","10.177.83.29","10.177.81.28","10.177.80.7","10.177.82.18","10.177.84.60","10.177.80.239","10.177.80.207","10.177.33.45","10.177.33.85","10.177.33.159","10.177.80.51","10.177.80.235","10.177.82.250","10.177.80.224","10.177.82.248"], instancias: ["ec2-scppsw-procfit-prd-001","ec2-scppsw-procfit-prd-002","ec2-casi-procfit-prd-001","ec2-casi-procfit-prd-002","ec2-scpsrv-procfit-prd-001","ec2-scpsrv-procfit-prd-002","ec2-scpsrv-procfit-prd-003","ec2-scpprtl-procfit-prd-001","ec2-scpprtl-procfit-prd-002","ec2-scopegw-procfit-new-sa-east-1-001","ec2-scopegw-procfit-new-sa-east-1-002","ec2-scopegw-procfit-new-sa-east-1-003","ec2-scpcnsl-procfit-prd-001","ec2-tknsvc-procfit-prd-001","ec2-tknsvc-procfit-prd-002","ec2-stpca-procfit-prd-001","ec2-stpca-procfit-prd-002-disasterrecovery"] },
+"Arius": { urlBase: "https://scope-portal-integrador5.conexao-tech.com", ips: ["10.177.80.73","10.177.82.78","10.177.83.30","10.177.81.40","10.177.80.61","10.177.82.35","10.177.84.10","10.177.80.227","10.177.80.248","10.177.33.59","10.177.33.117","10.177.33.150","10.177.80.43","10.177.80.196","10.177.82.229","10.177.80.197","10.177.82.216"], instancias: ["ec2-scppsw-arius-prd-001","ec2-scppsw-arius-prd-002","ec2-casi-arius-prd-001","ec2-casi-arius-prd-002","ec2-scpsrv-arius-prd-001","ec2-scpsrv-arius-prd-002","ec2-scpsrv-arius-prd-003","ec2-scpprtl-arius-prd-001","ec2-scpprtl-arius-prd-002","ec2-scopegw-arius-sa-east-1-001","ec2-scopegw-arius-sa-east-1-002","ec2-scopegw-arius-sa-east-1-003","ec2-scpcnsl-arius-prd-001","ec2-tknsvc-arius-prd-001","ec2-tknsvc-arius-prd-002","ec2-stpca-arius-prd-001","ec2-stpca-arius-prd-002-disasterrecovery"] },
+"MultiplusCard": { urlBase: "https://scope-portal-integrador2.conexao-tech.com", ips: ["10.177.112.82","10.177.114.91","10.177.113.47","10.177.115.10","10.177.112.33","10.177.114.16","10.177.116.57","10.177.112.209","10.177.114.244","10.177.33.23","10.177.33.75","10.177.33.187","10.177.112.22","10.177.112.198","10.177.114.242","10.177.112.231","-"], instancias: ["ec2-scopepsw-prod-mtpls-sa-east-1-001","ec2-scopepsw-prod-mtpls-sa-east-1-002","ec2-casi-prod-mtpls-sa-east-1-001","ec2-casi-prod-mtpls-sa-east-1-002","ec2-scopesrv-prod-mtpls-sa-east-1-001","ec2-scopesrv-prod-mtpls-sa-east-1-002","ec2-scopesrv-prod-mtpls-sa-east-1-003","ec2-scopeportal-prod-mtpls-sa-east-1-001","ec2-scopeportal-prod-mtpls-sa-east-1-002","ec2-scopegw-multiplus-sa-east-1-001","ec2-scopegw-multiplus-sa-east-1-002","ec2-scopegw-multiplus-sa-east-1-003","ec2-scopeconsole-prod-mtpls-sa-east-1-001","ec2-tokenservice-prod-mtpls-sa-east-1-001","ec2-tokenservice-prod-mtpls-sa-east-1-002","ec2-stepca-prod-mtpls-sa-east-1-001","-"] },
+"Softcom": { urlBase: "https://scope-portal-integrador1.conexao-tech.com", ips: ["10.177.80.113","10.177.82.100","10.177.81.30","10.177.83.52","10.177.80.20","10.177.82.47","10.177.84.5","10.177.80.201","10.177.80.240","10.177.33.61","10.177.33.110","10.177.33.39","10.177.80.30","10.177.80.211","10.177.82.239","10.177.80.209","10.177.82.232"], instancias: ["ec2-scopepsw-prod-softcom-sa-east-1-001","ec2-scopepsw-prod-softcom-sa-east-1-002","ec2-casi-prod-softcom-sa-east-1-001","ec2-casi-prod-softcom-sa-east-1-002","ec2-scopesrv-prod-softcom-sa-east-1-001","ec2-scopesrv-prod-softcom-sa-east-1-002","ec2-scopesrv-prod-softcom-sa-east-1-003","ec2-scopeportal-prod-softcom-sa-east-1-001","ec2-scopeportal-prod-softcom-sa-east-1-002","ec2-scopegw-softcom-sa-east-1-001","ec2-scopegw-softcom-sa-east-1-002","ec2-scopegw-softcom-sa-east-1-003","ec2-scopeconsole-prod-intg-sa-east-1-001","ec2-tokenservice-prod-softcom-sa-east-1-001","ec2-tokenservice-prod-softcom-sa-east-1-002","ec2-stepca-prod-softcom-sa-east-1-001","ec2-stepca-prod-softcom-sa-east-1-002-DisasterRecovery"] },
+"Compartilhado": { urlBase: "https://scope-portal-integradores.conexao-tech.com", ips: ["10.177.80.94","10.177.82.96","10.177.81.8","10.177.83.60","10.177.80.9","10.177.82.30","10.177.84.38","10.177.80.230","10.177.80.225","10.177.33.55","10.177.33.125","10.177.33.185","10.177.33.35","10.177.80.25","10.177.80.208","10.177.82.201","10.177.80.250","10.177.82.215"], instancias: ["ec2-scopepsw-prod-cmptd-sa-east-1-001","ec2-scopepsw-prod-cmptd-sa-east-1-002","ec2-casi-prod-intg-sa-east-1-001","ec2-casi-prod-intg-sa-east-1-002","ec2-scopesrv-prod-cmptd-sa-east-1-001","ec2-scopesrv-prod-cmptd-sa-east-1-002","ec2-scopesrv-prod-cmptd-sa-east-1-003","ec2-scopeportal-prod-cmptd-sa-east-1-001","ec2-scopeportal-prod-cmptd-sa-east-1-002","ec2-scopegw-cmptl-sa-east-1-001","ec2-scopegw-cmptl-sa-east-1-002","ec2-scopegw-cmptl-sa-east-1-003","ec2-scopegw-cmptl-sa-east-1-004","ec2-scopeconsole-prod-cmptd-sa-east-1-001","ec2-tokenservice-prod-cmptd-sa-east-1-001","ec2-tokenservice-prod-cmptd-sa-east-1-002","ec2-stepca-prod-cmptd-sa-east-1-001","ec2-stepca-prod-cmptd-sa-east-1-002-disasterrecovery"] },
+"Elgin": { urlBase: "https://scope-portal-integrador3.conexao-tech.com", ips: ["10.177.225.202","10.177.226.51","10.177.224.22","10.177.224.126","10.177.224.138","10177224225","10.177.225.46","10.177.225.115","10.177.225.181","10.177.33.38","10.177.33.92","10.177.33.151","10.177.224.158","10.177.225.107","10.177.225.172","10.177.225.119","10.177.225.182"], instancias: ["ec2-scppsw-elgin-prd-001","ec2-scppsw-elgin-prd-002","ec2-casi-elgin-prd-001","ec2-casi-elgin-prd-002","ec2-scpsrv-elgin-prd-001","ec2-scpsrv-elgin-prd-002","ec2-scpsrv-elgin-prd-003","ec2-scpprtl-elgin-prd-001","ec2-scpprtl-elgin-prd-002","ec2-scopegw-elgin-sa-east-1-001","ec2-scopegw-elgin-sa-east-1-002","ec2-scopegw-elgin-sa-east-1-003","ec2-scpcnsl-elgin-prd-001","ec2-tknsvc-elgin-prd-001","ec2-tknsvc-elgin-prd-002","ec2-stpca-elgin-prd-001","ec2-stpca-elgin-prd-002-disasterrecovery"] },
+"Linear Sistemas": { urlBase: "https://scope-portal-integrador6.conexao-tech.com", ips: ["10.177.80.89","10.177.82.114","10.177.83.15","10.177.81.61","10.177.80.40","10.177.82.54","10.177.84.33","10.177.80.237","10.177.80.252","10.177.33.34","10.177.33.118","10.177.33.171","10.177.80.24","10.177.80.199","10.177.82.228","10.177.80.210","10.177.82.230"], instancias: ["ec2-scppsw-linear-prd-001","ec2-scppsw-linear-prd-002","ec2-casi-linear-prd-001","ec2-casi-linear-prd-002","ec2-scpsrv-linear-prd-001","ec2-scpsrv-linear-prd-002","ec2-scpsrv-linear-prd-003","ec2-scpprtl-linear-prd-001","ec2-scpprtl-linear-prd-002","ec2-scopegw-linear-sa-east-1-001","ec2-scopegw-linear-sa-east-1-002","ec2-scopegw-linear-sa-east-1-003","ec2-scpcnsl-linear-prd-001","ec2-tknsvc-linear-prd-001","ec2-tknsvc-linear-prd-002","ec2-stpca-linear-prd-001","ec2-stpca-linear-prd-002-disasterrecovery"] }
+};
+
+function obterCategoria(instancia) {
+    const lower = instancia.toLowerCase();
+    if (lower.includes('psw')) return '📦 Módulo PSW (Processamento)';
+    if (lower.includes('casi')) return '🔗 Módulo CASI';
+    if (lower.includes('srv')) return '🖥️ Servidores de Aplicação (Scope Srv)';
+    if (lower.includes('prtl') || lower.includes('portal')) return '🌐 Portal';
+    if (lower.includes('gw')) return '🛡️ Gateway';
+    if (lower.includes('cnsl') || lower.includes('console')) return '⚙️ Console de Operações';
+    if (lower.includes('tkn') || lower.includes('token')) return '🔑 Token Service';
+    if (lower.includes('stpca') || lower.includes('pca')) return '🔒 Stepca';
+    return '📋 Outros';
+}
+
+function abrirDetalhes(nomeAmbiente) {
+    const ambiente = dadosAmbientes[nomeAmbiente];
+    if (!ambiente) return;
+    document.getElementById('home-view').style.display = 'none';
+    document.getElementById('details-view').style.display = 'block';
+    document.getElementById('backButton').style.display = 'inline-block';
+    document.getElementById('main-title').innerText = `Ambiente - ${nomeAmbiente}`;
+    document.getElementById('main-subtitle').innerText = 'Relação de Instâncias e Endereços IP Separados por Módulos';
+
+    const actionBar = document.getElementById('action-bar');
+    actionBar.style.display = 'grid';
+    actionBar.innerHTML = `
+        <a href="${ambiente.urlBase}/portal/" target="_blank" rel="noopener noreferrer" class="btn-action">Portal Principal <span class="tag">Portal</span></a>
+        <a href="${ambiente.urlBase}/adm" target="_blank" rel="noopener noreferrer" class="btn-action">Painel Administrativo <span class="tag">ADM</span></a>
+        <a href="${ambiente.urlBase}/console/" target="_blank" rel="noopener noreferrer" class="btn-action">Console de Operações <span class="tag">Console</span></a>`;
+
+    const gruposMap = {};
+    for (let i = 0; i < ambiente.instancias.length; i++) {
+        const inst = ambiente.instancias[i];
+        const ip = ambiente.ips[i] || '-';
+        const cat = obterCategoria(inst);
+        if (!gruposMap[cat]) gruposMap[cat] = [];
+        gruposMap[cat].push({ instancia: inst, ip });
+    }
+
+    const container = document.getElementById('groups-container');
+    container.innerHTML = '';
+    const ordemTemas = ['📦 Módulo PSW (Processamento)','🔗 Módulo CASI','🖥️ Servidores de Aplicação (Scope Srv)','🌐 Portal','🛡️ Gateway','⚙️ Console de Operações','🔑 Token Service','🔒 Stepca','📋 Outros'];
+    ordemTemas.forEach(tema => {
+        if (gruposMap[tema] && gruposMap[tema].length > 0) {
+            const groupDiv = document.createElement('div');
+            groupDiv.className = 'section-group';
+            let linhasTabela = '';
+            gruposMap[tema].forEach(item => { linhasTabela += `<tr><td><strong>${item.instancia}</strong></td><td>${item.ip}</td></tr>`; });
+            groupDiv.innerHTML = `<div class="section-header">${tema}</div><div class="table-container"><table><thead><tr><th>Instância</th><th>Endereço IP</th></tr></thead><tbody>${linhasTabela}</tbody></table></div>`;
+            container.appendChild(groupDiv);
         }
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-        function abrirDetalhes(nomeAmbiente) {
-            const ambiente = dadosAmbientes[nomeAmbiente];
-            if (!ambiente) return;
+function abrirAzure() {
+    document.getElementById('home-view').style.display = 'none';
+    document.getElementById('details-view').style.display = 'block';
+    document.getElementById('backButton').style.display = 'inline-block';
+    document.getElementById('main-title').innerText = 'Servidores Azure';
+    document.getElementById('main-subtitle').innerText = 'Relação de servidores e endereços IP';
+    const actionBar = document.getElementById('action-bar');
+    actionBar.innerHTML = '';
+    actionBar.style.display = 'none';
 
-            document.getElementById('home-view').style.display = 'none';
-            document.getElementById('details-view').style.display = 'block';
-            document.getElementById('backButton').style.display = 'inline-block';
+    const gruposAzure = [
+        { titulo: '🔗 Integradores - TCP', servidores: ['172.18.0.81','172.18.0.82','172.18.0.83'] },
+        { titulo: '🌐 Integradores - HTTPS', servidores: ['172.27.233.70','172.27.233.71'] },
+        { titulo: '🖥️ SCOPE Legado PROD2', servidores: ['172.18.0.21','172.18.0.22','172.18.0.20'] },
+        { titulo: '🖥️ SCOPE Legado PROD1', servidores: ['172.18.0.111','172.18.0.112','172.18.0.113'] }
+    ];
 
-            document.getElementById('main-title').innerText = `Ambiente - ${nomeAmbiente}`;
-            document.getElementById('main-subtitle').innerText = `Relação de Instâncias e Endereços IP Separados por Módulos`;
+    const container = document.getElementById('groups-container');
+    container.innerHTML = '';
+    gruposAzure.forEach(grupo => {
+        const groupDiv = document.createElement('div');
+        groupDiv.className = 'section-group';
+        let linhasTabela = '';
+        grupo.servidores.forEach(ip => { linhasTabela += `<tr><td><strong>Servidor</strong></td><td>${ip}</td></tr>`; });
+        groupDiv.innerHTML = `<div class="section-header">${grupo.titulo}</div><div class="table-container"><table><thead><tr><th>Tipo</th><th>Endereço IP</th></tr></thead><tbody>${linhasTabela}</tbody></table></div>`;
+        container.appendChild(groupDiv);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-            const actionBar = document.getElementById('action-bar');
-            actionBar.innerHTML = `
-                <a href="${ambiente.urlBase}/portal/" target="_blank" class="btn-action">Portal Principal <span class="tag">Portal</span></a>
-                <a href="${ambiente.urlBase}/adm" target="_blank" class="btn-action">Painel Administrativo <span class="tag">ADM</span></a>
-                <a href="${ambiente.urlBase}/console/" target="_blank" class="btn-action">Console de Operações <span class="tag">Console</span></a>
-            `;
-
-            const gruposMap = {};
-            for (let i = 0; i < ambiente.instancias.length; i++) {
-                const inst = ambiente.instancias[i];
-                const ip = ambiente.ips[i] || "-";
-                const cat = obterCategoria(inst);
-
-                if (!gruposMap[cat]) gruposMap[cat] = [];
-                gruposMap[cat].push({ instancia: inst, ip: ip });
-            }
-
-            const container = document.getElementById('groups-container');
-            container.innerHTML = '';
-
-            const ordemTemas = [
-                '📦 Módulo PSW (Processamento)',
-                '🔗 Módulo CASI',
-                '🖥️ Servidores de Aplicação (Scope Srv)',
-                '🌐 Portal',
-                '🛡️ Gateway',
-                '⚙️ Console de Operações',
-                '🔑 Token Service',
-                '🔒 Stepca',
-               
-            ];
-
-            ordemTemas.forEach(tema => {
-                if (gruposMap[tema] && gruposMap[tema].length > 0) {
-                    const groupDiv = document.createElement('div');
-                    groupDiv.className = 'section-group';
-
-                    let linhasTabela = '';
-                    gruposMap[tema].forEach(item => {
-                        linhasTabela += `
-                            <tr>
-                                <td><strong>${item.instancia}</strong></td>
-                                <td>${item.ip}</td>
-                            </tr>
-                        `;
-                    });
-
-                    groupDiv.innerHTML = `
-                        <div class="section-header">${tema}</div>
-                        <div class="table-container">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Instância</th>
-                                        <th>Endereço IP</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${linhasTabela}
-                                </tbody>
-                            </table>
-                        </div>
-                    `;
-                    container.appendChild(groupDiv);
-                }
-            });
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function voltarHome() {
-            document.getElementById('details-view').style.display = 'none';
-            document.getElementById('home-view').style.display = 'grid';
-            document.getElementById('backButton').style.display = 'none';
-
-            document.getElementById('main-title').innerText = "Painel de Acesso - Ambientes AWS";
-            document.getElementById('main-subtitle').innerText = "Central de links rápidos";
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    </script>
+function voltarHome() {
+    document.getElementById('details-view').style.display = 'none';
+    document.getElementById('home-view').style.display = 'grid';
+    document.getElementById('backButton').style.display = 'none';
+    document.getElementById('main-title').innerText = 'Painel de Acesso - Ambientes Cloud';
+    document.getElementById('main-subtitle').innerText = 'Central de links rápidos';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
 </body>
 </html>
